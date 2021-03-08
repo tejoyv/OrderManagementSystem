@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.project.dto.ProductDTO;
+
 @Entity
 @Table(name = "subscribedproduct")
 public class Subscribedproduct {
@@ -65,4 +67,6 @@ public class Subscribedproduct {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+
 }
