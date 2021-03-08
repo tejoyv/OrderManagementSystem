@@ -1,10 +1,10 @@
-package com.infy.project_FA4;
+package com.project.Product;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectFa4ApplicationTests {
+class ProductApplicationTests {
 
 	@Test
 	void contextLoads() {
