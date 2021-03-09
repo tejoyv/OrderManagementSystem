@@ -34,7 +34,7 @@ public class Buyer {
 	public Buyer() {
 		super();
 	}
-
+    //parametrized constructor
 	public Buyer(int buyerid, String name, String password, String email, String phoneNumber, String isPrivileged,
 			String rewardPoints, String isActive) {
 		super();
@@ -47,7 +47,7 @@ public class Buyer {
 		this.rewardPoints = rewardPoints;
 		this.isActive = isActive;
 	}
-
+    //getters and setters
 	public int getBuyerid() {
 		return buyerId;
 	}
