@@ -1,6 +1,4 @@
-package com.project.entity;
-
-import java.sql.Date;
+package com.project.Product.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,8 +25,8 @@ public class Product {
 	double price;
 	@Column(nullable = false)
 	String productname;
-	@Column(nullable = false)
-	int rating;
+	@Column
+	String rating;
 	@Column(nullable = false)
 	int sellerid;
 	@Column(nullable = false)
@@ -43,7 +41,7 @@ public class Product {
 		
 		//parameterized constructor
 	public Product(int prodid, String brand, String category, String description, String image, double price,
-				String productname, int rating, int sellerid, int stock, String subcategory) {
+				String productname, String rating, int sellerid, int stock, String subcategory) {
 		super();
 		this.prodid = prodid;
 		this.brand = brand;
@@ -101,10 +99,10 @@ public class Product {
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
-	public int getRating() {
+	public String getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 	public int getSellerid() {
