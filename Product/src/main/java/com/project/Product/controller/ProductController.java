@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,4 +31,17 @@ public class ProductController {
 		return productService.getAllProducts();
 	}
 	
+	// Fetches products according to category
+	@GetMapping(value = "/api/{category}/products",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ProductDTO> getProductsByCategory(@PathVariable String category) throws ProductMSException{
+		logger.info("Product details for category {}", category);
+		return productService.getProductByCategory(category);
+	}
+	
+	// Fetches products according to product name
+	@GetMapping(value = "/api/product/{productname}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ProductDTO> getProductsByName(@PathVariable String productname) throws ProductMSException{
+		logger.info("Product details for product name {}", productname);
+		return productService.getProductByName(productname);
+	}
 }
