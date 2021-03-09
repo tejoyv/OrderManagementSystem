@@ -1,6 +1,6 @@
-package com.project.dto;
+package com.project.Project.dto;
 
-import com.project.entity.Subscribedproduct;
+import com.project.Product.entity.Subscribedproduct;
 
 public class SubscribedproductDTO {
 	int subid;

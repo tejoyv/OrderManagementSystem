@@ -1,5 +1,5 @@
-package com.project.dto;
-import com.project.entity.Product;
+package com.project.Project.dto;
+import com.project.Product.entity.Product;
 
 public class ProductDTO {
 	int prodid;
@@ -9,7 +9,7 @@ public class ProductDTO {
 	String image;
 	double price;
 	String productname;
-	int rating;
+	String rating;
 	int sellerid;
 	int stock;
 	String subcategory;
@@ -21,7 +21,7 @@ public class ProductDTO {
 		
 		//parameterized constructor
 	public ProductDTO(int prodid, String brand, String category, String description, String image, double price,
-				String productname, int rating, int sellerid, int stock, String subcategory) {
+				String productname, String rating, int sellerid, int stock, String subcategory) {
 		super();
 		this.prodid = prodid;
 		this.brand = brand;
@@ -79,10 +79,10 @@ public class ProductDTO {
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
-	public int getRating() {
+	public String getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 	public int getSellerid() {
