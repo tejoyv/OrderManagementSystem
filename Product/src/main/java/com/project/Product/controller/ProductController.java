@@ -30,10 +30,4 @@ public class ProductController {
 		return productService.getAllProducts();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,path = "/test")
-	public String getTest(){
-		logger.info("Fetching all products");
-		System.out.println("In controller");
-		return "<h1>Test</h1>";
-	}
 }
