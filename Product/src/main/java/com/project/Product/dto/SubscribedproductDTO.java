@@ -1,4 +1,4 @@
-package com.project.Project.dto;
+package com.project.Product.dto;
 
 import com.project.Product.entity.Subscribedproduct;
 

@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.Product.dto.ProductDTO;
 import com.project.Product.entity.Product;
 import com.project.Product.repository.ProductRepository;
-import com.project.Project.dto.ProductDTO;
 
 @Service
 public class ProductServiceImpl implements ProductService{

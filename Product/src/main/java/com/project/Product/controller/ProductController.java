@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.Product.dto.ProductDTO;
 import com.project.Product.service.ProductMSException;
 import com.project.Product.service.ProductService;
-import com.project.Project.dto.ProductDTO;
 
 @RestController
 public class ProductController {
