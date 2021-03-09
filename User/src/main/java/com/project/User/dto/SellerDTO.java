@@ -7,13 +7,13 @@ public class SellerDTO {
     String email;
     String phoneNumber;
     String password;
-    int isActive;
+    String isActive;
     
 	public SellerDTO() {
 		super();
 	}
 
-	public SellerDTO(int sellerId, String name, String email, String phoneNumber, String password, int isActive) {
+	public SellerDTO(int sellerId, String name, String email, String phoneNumber, String password, String isActive) {
 		super();
 		this.sellerId = sellerId;
 		this.name = name;
@@ -63,11 +63,11 @@ public class SellerDTO {
 		this.password = password;
 	}
 
-	public int getIsActive() {
+	public String getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(int isActive) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 	

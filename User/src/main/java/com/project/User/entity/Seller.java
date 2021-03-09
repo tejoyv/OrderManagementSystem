@@ -22,14 +22,14 @@ public class Seller {
     String phoneNumber;
 	@Column(nullable = false)
     String password;
-	@Column(nullable = false)
-    int isActive;
+	@Column
+    String isActive;
 	
 	public Seller() {
 		super();
 	}
 
-	public Seller(int sellerId, String name, String email, String phoneNumber, String password, int isActive) {
+	public Seller(int sellerId, String name, String email, String phoneNumber, String password, String isActive) {
 		super();
 		this.sellerId = sellerId;
 		this.name = name;
@@ -79,11 +79,11 @@ public class Seller {
 		this.password = password;
 	}
 
-	public int getIsActive() {
+	public String getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(int isActive) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 	

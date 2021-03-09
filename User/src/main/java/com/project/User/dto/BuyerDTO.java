@@ -1,8 +1,4 @@
 package com.project.User.dto;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import com.project.User.entity.Buyer;
 
@@ -13,16 +9,16 @@ public class BuyerDTO {
 	String password;
 	String email;
 	String phoneNumber;
-	int isPrivileged;
-	int rewardPoints;
-	int isActive;
+	String isPrivileged;
+	String rewardPoints;
+	String isActive;
 	
 	public BuyerDTO() {
 		super();
 	}
 
-	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, int isPrivileged,
-			int rewardPoints, int isActive) {
+	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, String isPrivileged,
+			String rewardPoints, String isActive) {
 		super();
 		this.buyerid = buyerid;
 		this.name = name;
@@ -74,27 +70,27 @@ public class BuyerDTO {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public int getIsPrivileged() {
+	public String getIsPrivileged() {
 		return isPrivileged;
 	}
 
-	public void setIsPrivileged(int isPrivileged) {
+	public void setIsPrivileged(String isPrivileged) {
 		this.isPrivileged = isPrivileged;
 	}
 
-	public int getRewardPoints() {
+	public String getRewardPoints() {
 		return rewardPoints;
 	}
 
-	public void setRewardPoints(int rewardPoints) {
+	public void setRewardPoints(String rewardPoints) {
 		this.rewardPoints = rewardPoints;
 	}
 
-	public int getIsActive() {
+	public String getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(int isActive) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 	
