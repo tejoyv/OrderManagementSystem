@@ -14,105 +14,103 @@ import javax.persistence.Table;
 public class Buyer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int buyerId;
+	int BUYERID;
 	@Column(nullable = false)
-	String name;
+	String NAME;
 	@Column(nullable = false)
-	String password;
+	String PASSWORD;
 	@Column(nullable = false)
-	String email;
+	String EMAIL;
 	@Column(nullable = false)
-	String phoneNumber;
+	String PHONENUMBER;
 	@Column
-	String isPrivileged;
+	String ISPRIVILEGED;
 	@Column
-	String rewardPoints;
+	String REWARDPOINTS;
 	@Column
-	String isActive;
+	String ISACTIVE;
 	
 	//parameterless constructor
 	public Buyer() {
 		super();
 	}
     //parametrized constructor
-	public Buyer(int buyerid, String name, String password, String email, String phoneNumber, String isPrivileged,
-			String rewardPoints, String isActive) {
+	public Buyer(int BUYERID, String NAME, String PASSWORD, String EMAIL, String phoneNumber, String ISPRIVILEGED,
+			String REWARDPOINTS, String isActive) {
 		super();
-		this.buyerId = buyerid;
-		this.name = name;
-		this.password = password;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.isPrivileged = isPrivileged;
-		this.rewardPoints = rewardPoints;
-		this.isActive = isActive;
+		this.BUYERID = BUYERID;
+		this.NAME = NAME;
+		this.PASSWORD = PASSWORD;
+		this.EMAIL = EMAIL;
+		this.PHONENUMBER = phoneNumber;
+		this.ISPRIVILEGED = ISPRIVILEGED;
+		this.REWARDPOINTS = REWARDPOINTS;
+		this.ISACTIVE = isActive;
 	}
     //getters and setters
-	public int getBuyerid() {
-		return buyerId;
+	public int getBuyerId() {
+		return BUYERID;
 	}
 
-	public void setBuyerid(int buyerid) {
-		this.buyerId = buyerid;
+	public void setBuyerId(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
 
 	public String getName() {
-		return name;
+		return NAME;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String NAME) {
+		this.NAME = NAME;
 	}
 
 	public String getPassword() {
-		return password;
+		return PASSWORD;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String PASSWORD) {
+		this.PASSWORD = PASSWORD;
 	}
 
 	public String getEmail() {
-		return email;
+		return EMAIL;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String EMAIL) {
+		this.EMAIL = EMAIL;
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return PHONENUMBER;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.PHONENUMBER = phoneNumber;
 	}
 
 	public String getIsPrivileged() {
-		return isPrivileged;
+		return ISPRIVILEGED;
 	}
 
-	public void setIsPrivileged(String isPrivileged) {
-		this.isPrivileged = isPrivileged;
+	public void setIsPrivileged(String ISPRIVILEGED) {
+		this.ISPRIVILEGED = ISPRIVILEGED;
 	}
 
 	public String getRewardPoints() {
-		return rewardPoints;
+		return REWARDPOINTS;
 	}
 
-	public void setRewardPoints(String rewardPoints) {
-		this.rewardPoints = rewardPoints;
+	public void setRewardPoints(String REWARDPOINTS) {
+		this.REWARDPOINTS = REWARDPOINTS;
 	}
 
 	public String getIsActive() {
-		return isActive;
+		return ISACTIVE;
 	}
 
 	public void setIsActive(String isActive) {
-		this.isActive = isActive;
+		this.ISACTIVE = isActive;
 	}
-	
-	
-	
+
 	
 }

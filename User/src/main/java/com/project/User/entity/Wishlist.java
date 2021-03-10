@@ -10,9 +10,9 @@ import javax.persistence.Table;
 @Table(name = "wishlist")
 public class Wishlist {
 	@Id
-	int buyerId;
+	int BUYERID;
 	@Id
-	int prodId;
+	int PRODID;
 	
 	//default constructor
 	public Wishlist() {
@@ -20,26 +20,26 @@ public class Wishlist {
 	}
 	
 	//parameterized constructor
-	public Wishlist(int buyerId, int prodId) {
+	public Wishlist(int BUYERID, int PRODID) {
 		super();
-		this.buyerId = buyerId;
-		this.prodId = prodId;
+		this.BUYERID = BUYERID;
+		this.PRODID = PRODID;
 	}
 
-	public int getBuyerId() {
-		return buyerId;
+	public int getBUYERID() {
+		return BUYERID;
 	}
 
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setBUYERID(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
 
-	public int getProdId() {
-		return prodId;
+	public int getPRODID() {
+		return PRODID;
 	}
 
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
 	
 	
