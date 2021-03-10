@@ -13,9 +13,9 @@ public class SellerDTO {
 		super();
 	}
 
-	public SellerDTO(int sellerId, String name, String email, String phoneNumber, String password, String isActive) {
+	public SellerDTO(int sellerid, String name, String email, String phoneNumber, String password, String isActive) {
 		super();
-		this.SELLERID = sellerId;
+		this.SELLERID = sellerid;
 		this.NAME = name;
 		this.EMAIL = email;
 		this.PHONENUMBER = phoneNumber;
@@ -27,8 +27,8 @@ public class SellerDTO {
 		return SELLERID;
 	}
 
-	public void setSellerId(int sellerId) {
-		this.SELLERID = sellerId;
+	public void setSellerId(int SELLERID) {
+		this.SELLERID = SELLERID;
 	}
 
 	public String getName() {
@@ -74,6 +74,7 @@ public class SellerDTO {
 	// Converts Entity into DTO
 	public static SellerDTO valueOf(Seller seller) {
 		SellerDTO sellerDTO = new SellerDTO();
+		sellerDTO.setSellerId(seller.getSellerId());
 		sellerDTO.setEmail(seller.getEmail());
 		sellerDTO.setIsActive(seller.getIsActive());
 		sellerDTO.setName(seller.getName());
