@@ -12,9 +12,9 @@ import javax.persistence.IdClass;
 public class Cart {
      
 	@Id
-	int buyerId;
+	int BUYERID;
 	@Id
-	int prodId;
+	int PRODID;
 	@Column(nullable = false)
 	int quantity;
 	
@@ -22,27 +22,27 @@ public class Cart {
 		super();
 	}
 
-	public Cart(int buyerId, int prodId, int quantity) {
+	public Cart(int BUYERID, int PRODID, int quantity) {
 		super();
-		this.buyerId = buyerId;
-		this.prodId = prodId;
+		this.BUYERID = BUYERID;
+		this.PRODID = PRODID;
 		this.quantity = quantity;
 	}
 
-	public int getBuyerId() {
-		return buyerId;
+	public int getBUYERID() {
+		return BUYERID;
 	}
 
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setBUYERID(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
 
-	public int getProdId() {
-		return prodId;
+	public int getPRODID() {
+		return PRODID;
 	}
 
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
 
 	public int getQuantity() {

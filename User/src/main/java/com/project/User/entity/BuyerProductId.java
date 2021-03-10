@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class BuyerProductId implements Serializable {
 
-	int buyerId;
-	int prodId;
+	int BUYERID;
+	int PRODID;
 	
 	public BuyerProductId() {
 		super();
 	}
 
-	public BuyerProductId(int buyerId, int prodId) {
+	public BuyerProductId(int BUYERID, int PRODID) {
 		super();
-		this.buyerId = buyerId;
-		this.prodId = prodId;
+		this.BUYERID = BUYERID;
+		this.PRODID = PRODID;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + buyerId;
-		result = prime * result + prodId;
+		result = prime * result + BUYERID;
+		result = prime * result + PRODID;
 		return result;
 	}
 
@@ -35,9 +35,9 @@ public class BuyerProductId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BuyerProductId other = (BuyerProductId) obj;
-		if (buyerId != other.buyerId)
+		if (BUYERID != other.BUYERID)
 			return false;
-		if (prodId != other.prodId)
+		if (PRODID != other.PRODID)
 			return false;
 		return true;
 	}

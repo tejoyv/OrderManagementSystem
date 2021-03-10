@@ -13,78 +13,78 @@ import javax.persistence.Table;
 public class Seller {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int sellerId;
+	int SELLERID;
 	@Column(nullable = false)
-	String name;
+	String NAME;
 	@Column(nullable = false)
-    String email;
+    String EMAIL;
 	@Column(nullable = false)
-    String phoneNumber;
+    String PHONENUMBER;
 	@Column(nullable = false)
-    String password;
+    String PASSWORD;
 	@Column
-    String isActive;
+    String ISACTIVE;
 	
 	public Seller() {
 		super();
 	}
 
-	public Seller(int sellerId, String name, String email, String phoneNumber, String password, String isActive) {
+	public Seller(int SELLERID, String NAME, String EMAIL, String PHONENUMBER, String PASSWORD, String ISACTIVE) {
 		super();
-		this.sellerId = sellerId;
-		this.name = name;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.password = password;
-		this.isActive = isActive;
+		this.SELLERID = SELLERID;
+		this.NAME = NAME;
+		this.EMAIL = EMAIL;
+		this.PHONENUMBER = PHONENUMBER;
+		this.PASSWORD = PASSWORD;
+		this.ISACTIVE = ISACTIVE;
 	}
 
 	public int getSellerId() {
-		return sellerId;
+		return SELLERID;
 	}
 
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSellerId(int SELLERID) {
+		this.SELLERID = SELLERID;
 	}
 
 	public String getName() {
-		return name;
+		return NAME;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String NAME) {
+		this.NAME = NAME;
 	}
 
 	public String getEmail() {
-		return email;
+		return EMAIL;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String EMAIL) {
+		this.EMAIL = EMAIL;
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return PHONENUMBER;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(String PHONENUMBER) {
+		this.PHONENUMBER = PHONENUMBER;
 	}
 
 	public String getPassword() {
-		return password;
+		return PASSWORD;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String PASSWORD) {
+		this.PASSWORD = PASSWORD;
 	}
 
 	public String getIsActive() {
-		return isActive;
+		return ISACTIVE;
 	}
 
-	public void setIsActive(String isActive) {
-		this.isActive = isActive;
+	public void setISACTIVE(String ISACTIVE) {
+		this.ISACTIVE = ISACTIVE;
 	}
 	
 	
