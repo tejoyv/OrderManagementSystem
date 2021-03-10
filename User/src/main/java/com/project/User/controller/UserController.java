@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -95,4 +97,27 @@ public class UserController {
 		return userService.getAllSellers();
 	}
 	
+	@DeleteMapping(value="/api/buyer/deactivate/{buyerid}")
+	public ResponseEntity<String> deleteBuyer(@PathVariable Integer buyerid){
+		logger.info("Buyer successfully deleted with buyerid {}", buyerid);
+		String successMessage = "Buyer deactivated successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		ResponseEntity<String> response;
+		userService.deleteBuyer(buyerid);
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		return response;
+	}
+	
+	@DeleteMapping(value="/api/seller/deactivate/{sellerid}")
+	public ResponseEntity<String> deleteSeller(@PathVariable Integer sellerid){
+		logger.info("Seller successfully deleted with sellerid {}", sellerid);
+		String successMessage = "Seller deactivated successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		ResponseEntity<String> response;
+		userService.deleteSeller(sellerid);
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		return response;
+	}
+		
 }
+

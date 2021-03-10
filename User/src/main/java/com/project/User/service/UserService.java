@@ -107,4 +107,14 @@ public class UserService {
 		return sellerDTOs;
 	}
 	
+	//de-activate buyer account
+	public void deleteBuyer(Integer id) {
+		buyerRepository.deleteById(id);
+	}
+	
+	//de-activate seller account
+	public void deleteSeller(Integer id) {
+		sellerRepository.deleteById(id);
+	}
+	
 }
