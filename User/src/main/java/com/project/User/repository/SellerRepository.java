@@ -6,4 +6,5 @@ import com.project.User.entity.Seller;
 
 public interface SellerRepository extends JpaRepository<Seller, Integer>{
 	public Seller findByEMAIL(String email);
+	public Seller deleteByEMAIL(String email);
 }
