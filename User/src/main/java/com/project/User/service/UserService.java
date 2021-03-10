@@ -117,4 +117,29 @@ public class UserService {
 		sellerRepository.deleteById(id);
 	}
 	
+	//de-activate buyer account
+	public boolean deleteBuyer(String email) {
+		Buyer buyer = buyerRepository.findByEMAIL(email);
+		if(buyer!=null) {
+			buyerRepository.deleteById(buyer.getBuyerId());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//de-activate buyer account
+	public boolean deleteSeller(String email) {
+		Seller seller = sellerRepository.findByEMAIL(email);
+		if(seller!=null) {
+			sellerRepository.deleteById(seller.getSellerId());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+
 }

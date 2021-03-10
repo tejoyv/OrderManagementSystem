@@ -2,9 +2,12 @@ package com.project.User.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.User.Validator.Validator;
@@ -25,13 +29,16 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	Environment environment;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// Register a new buyer
 	@PostMapping(value="/api/buyer/register")
 	public void registerBuyer(@RequestBody BuyerDTO buyerDTO) {
 		logger.info("Registeration successful for buyer {}", buyerDTO);
-//		userService.registerBuyer(buyerDTO);
+		userService.registerBuyer(buyerDTO);
 //		ResponseEntity<String> response;
 //		if(Validator.validateBuyer(buyerDTO)) {
 //			String successMessage = "Buyer added successfully";
@@ -118,6 +125,35 @@ public class UserController {
 			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
 		return response;
 	}
-		
+	
+	@DeleteMapping(value="/api/buyer/deactivate")
+	public ResponseEntity<String> deleteBuyer(@RequestBody BuyerDTO buyerDTO){
+		logger.info("Buyer successfully deleted with buyerrid {}", buyerDTO.getBuyerid());
+		ResponseEntity<String> response;
+		String successMessage = "Buyer deactivated successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		if(userService.deleteBuyer(buyerDTO.getEmail())) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);	
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+	
+	@DeleteMapping(value="/api/seller/deactivate")
+	public ResponseEntity<String> deleteSeller(@RequestBody SellerDTO sellerDTO){
+		logger.info("Seller successfully deleted with email {}", sellerDTO.getEmail());
+		ResponseEntity<String> response;
+		String successMessage = "Seller deactivated successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		if(userService.deleteSeller(sellerDTO.getEmail())){
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+
 }
 
