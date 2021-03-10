@@ -45,8 +45,8 @@ public class CartDTO {
 	
 	public static CartDTO valueOf(Cart cart) {
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setBuyerId(cart.getBuyerId());
-		cartDTO.setProdId(cart.getProdId());
+		cartDTO.setBuyerId(cart.getBUYERID());
+		cartDTO.setProdId(cart.getPRODID());
 		cartDTO.setQuantity(cart.getQuantity());
 		return cartDTO;
 	}

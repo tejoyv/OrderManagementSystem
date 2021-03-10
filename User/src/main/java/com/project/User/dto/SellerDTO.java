@@ -2,12 +2,12 @@ package com.project.User.dto;
 import com.project.User.entity.Seller;
 
 public class SellerDTO {
-    int sellerId;
-    String name;
-    String email;
-    String phoneNumber;
-    String password;
-    String isActive;
+    int SELLERID;
+    String NAME;
+    String EMAIL;
+    String PHONENUMBER;
+    String PASSWORD;
+    String ISACTIVE;
     
 	public SellerDTO() {
 		super();
@@ -15,62 +15,63 @@ public class SellerDTO {
 
 	public SellerDTO(int sellerId, String name, String email, String phoneNumber, String password, String isActive) {
 		super();
-		this.sellerId = sellerId;
-		this.name = name;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.password = password;
-		this.isActive = isActive;
+		this.SELLERID = sellerId;
+		this.NAME = name;
+		this.EMAIL = email;
+		this.PHONENUMBER = phoneNumber;
+		this.PASSWORD = password;
+		this.ISACTIVE = isActive;
 	}
 
 	public int getSellerId() {
-		return sellerId;
+		return SELLERID;
 	}
 
 	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+		this.SELLERID = sellerId;
 	}
 
 	public String getName() {
-		return name;
+		return NAME;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.NAME = name;
 	}
 
 	public String getEmail() {
-		return email;
+		return EMAIL;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.EMAIL = email;
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return PHONENUMBER;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.PHONENUMBER = phoneNumber;
 	}
 
 	public String getPassword() {
-		return password;
+		return PASSWORD;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.PASSWORD = password;
 	}
 
 	public String getIsActive() {
-		return isActive;
+		return ISACTIVE;
 	}
 
 	public void setIsActive(String isActive) {
-		this.isActive = isActive;
+		this.ISACTIVE = isActive;
 	}
 	
+	// Converts Entity into DTO
 	public static SellerDTO valueOf(Seller seller) {
 		SellerDTO sellerDTO = new SellerDTO();
 		sellerDTO.setEmail(seller.getEmail());
@@ -80,11 +81,23 @@ public class SellerDTO {
 		sellerDTO.setPhoneNumber(seller.getPhoneNumber());
 		return sellerDTO;
 	}
+	
+	// Converts DTO into Entity
+	public Seller createEntity() {
+		Seller seller = new Seller();
+		seller.setEmail(this.getEmail());
+		seller.setISACTIVE(this.getIsActive());
+		seller.setName(this.getName());
+		seller.setPassword(this.getPassword());
+		seller.setPhoneNumber(this.getPhoneNumber());
+		seller.setSellerId(this.getSellerId());
+		return seller;
+	}
 
 	@Override
 	public String toString() {
-		return "SellerDTO [sellerId=" + sellerId + ", name=" + name + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", password=" + password + ", isActive=" + isActive + "]";
+		return "SellerDTO [sellerId=" + SELLERID + ", name=" + NAME + ", email=" + EMAIL + ", phoneNumber="
+				+ PHONENUMBER + ", password=" + PASSWORD + ", isActive=" + ISACTIVE + "]";
 	}
     
 	

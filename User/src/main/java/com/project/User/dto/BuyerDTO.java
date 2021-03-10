@@ -8,7 +8,7 @@ public class BuyerDTO {
 	String name;
 	String password;
 	String email;
-	String phoneNumber;
+	String PHONENUMBER;
 	String isPrivileged;
 	String rewardPoints;
 	String isActive;
@@ -24,7 +24,7 @@ public class BuyerDTO {
 		this.name = name;
 		this.password = password;
 		this.email = email;
-		this.phoneNumber = phoneNumber;
+		this.PHONENUMBER = phoneNumber;
 		this.isPrivileged = isPrivileged;
 		this.rewardPoints = rewardPoints;
 		this.isActive = isActive;
@@ -63,11 +63,11 @@ public class BuyerDTO {
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return PHONENUMBER;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.PHONENUMBER = phoneNumber;
 	}
 
 	public String getIsPrivileged() {
@@ -94,10 +94,10 @@ public class BuyerDTO {
 		this.isActive = isActive;
 	}
 	
-	
+	// Converts Entity into DTO
 	public static BuyerDTO valueOf(Buyer buyer) {
 		BuyerDTO buyerDTO = new BuyerDTO();
-		buyerDTO.setBuyerid(buyer.getBuyerid());
+		buyerDTO.setBuyerid(buyer.getBuyerId());
 		buyerDTO.setEmail(buyer.getEmail());
 		buyerDTO.setIsActive(buyer.getIsActive());
 		buyerDTO.setIsPrivileged(buyer.getIsPrivileged());
@@ -107,11 +107,25 @@ public class BuyerDTO {
 		buyerDTO.setRewardPoints(buyer.getRewardPoints());
 		return buyerDTO;
 	}
+	
+	// Converts DTO into Entity
+	public Buyer createEntity() {
+		Buyer buyer = new Buyer();
+		buyer.setBuyerId(this.getBuyerid());
+		buyer.setEmail(this.getEmail());
+		buyer.setIsActive(this.getIsActive());
+		buyer.setIsPrivileged(this.getIsPrivileged());
+		buyer.setName(this.getName());
+		buyer.setPassword(this.getPassword());
+		buyer.setPhoneNumber(this.getPhoneNumber());
+		buyer.setRewardPoints(this.getRewardPoints());
+		return buyer;
+	}
 
 	@Override
 	public String toString() {
 		return "BuyerDTO [buyerid=" + buyerid + ", name=" + name + ", password=" + password + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", isPrivileged=" + isPrivileged + ", rewardPoints=" + rewardPoints
+				+ ", phoneNumber=" + PHONENUMBER + ", isPrivileged=" + isPrivileged + ", rewardPoints=" + rewardPoints
 				+ ", isActive=" + isActive + "]";
 	}
 	
