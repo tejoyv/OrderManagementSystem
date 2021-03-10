@@ -8,11 +8,11 @@ import javax.persistence.*;
 public class ProductsOrdered {
 	
 	@Id
-	int orderId;
+	int orderid;
 	@Id
-	int prodId;
+	int prodid;
 	@Column(nullable = false)
-	int sellerId;
+	int sellerid;
 	@Column(nullable = false)
 	int quantity;
 	@Column(nullable = false)
@@ -26,11 +26,11 @@ public class ProductsOrdered {
 	}
 
 	//parameterised constructor
-	public ProductsOrdered(int orderId, int prodId, int sellerId, int quantity, String status, double price) {
+	public ProductsOrdered(int orderid, int prodid, int sellerid, int quantity, String status, double price) {
 		super();
-		this.orderId = orderId;
-		this.prodId = prodId;
-		this.sellerId = sellerId;
+		this.orderid = orderid;
+		this.prodid = prodid;
+		this.sellerid = sellerid;
 		this.quantity = quantity;
 		this.status = status;
 		this.price = price;
@@ -38,22 +38,22 @@ public class ProductsOrdered {
 
 	//getters and setters
 	public int getOrderId() {
-		return orderId;
+		return orderid;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderId(int orderid) {
+		this.orderid = orderid;
 	}
 	public int getProdId() {
-		return prodId;
+		return prodid;
 	}
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setProdId(int prodid) {
+		this.prodid = prodid;
 	}
 	public int getSellerId() {
-		return sellerId;
+		return sellerid;
 	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSellerId(int sellerid) {
+		this.sellerid = sellerid;
 	}
 
 	public int getQuantity() {

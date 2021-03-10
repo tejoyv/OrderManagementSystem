@@ -13,9 +13,9 @@ import javax.persistence.Table;
 @Table(name = "orderdetails")
 public class Orderdetails {
 	@Id
-	int orderId;
+	int orderid;
 	@Column(nullable = false)
-	int buyerId;
+	int buyerid;
 	@Column(nullable = false)
 	double amount;
 	@Column(nullable = false)
@@ -26,10 +26,10 @@ public class Orderdetails {
 	String status;
 
 	//parameterised constructor
-	public Orderdetails(int orderId, int buyerId, double amount, Date date, String address, String status) {
+	public Orderdetails(int orderid, int buyerId, double amount, Date date, String address, String status) {
 		super();
-		this.orderId = orderId;
-		this.buyerId = buyerId;
+		this.orderid = orderid;
+		this.buyerid = buyerid;
 		this.amount = amount;
 		this.date = date;
 		this.address = address;
@@ -43,16 +43,16 @@ public class Orderdetails {
 
 	//getters and setters
 	public int getOrderId() {
-		return orderId;
+		return orderid;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderId(int orderid) {
+		this.orderid = orderid;
 	}
 	public int getBuyerId() {
-		return buyerId;
+		return buyerid;
 	}
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setBuyerId(int buyerid) {
+		this.buyerid = buyerid;
 	}
 	public double getAmount() {
 		return amount;
