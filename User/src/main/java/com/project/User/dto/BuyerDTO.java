@@ -4,14 +4,14 @@ import com.project.User.entity.Buyer;
 
 public class BuyerDTO {
 	
-	int buyerid;
-	String name;
-	String password;
-	String email;
+	int BUYERID;
+	String NAME;
+	String PASSWORD;
+	String EMAIL;
 	String PHONENUMBER;
-	String isPrivileged;
-	String rewardPoints;
-	String isActive;
+	String ISPRIVILEGED;
+	String REWARDPOINTS;
+	String ISACTIVE;
 	
 	public BuyerDTO() {
 		super();
@@ -20,46 +20,46 @@ public class BuyerDTO {
 	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, String isPrivileged,
 			String rewardPoints, String isActive) {
 		super();
-		this.buyerid = buyerid;
-		this.name = name;
-		this.password = password;
-		this.email = email;
+		this.BUYERID = buyerid;
+		this.NAME = name;
+		this.PASSWORD = password;
+		this.EMAIL = email;
 		this.PHONENUMBER = phoneNumber;
-		this.isPrivileged = isPrivileged;
-		this.rewardPoints = rewardPoints;
-		this.isActive = isActive;
+		this.ISPRIVILEGED = isPrivileged;
+		this.REWARDPOINTS = rewardPoints;
+		this.ISACTIVE = isActive;
 	}
 
 	public int getBuyerid() {
-		return buyerid;
+		return BUYERID;
 	}
 
 	public void setBuyerid(int buyerid) {
-		this.buyerid = buyerid;
+		this.BUYERID = buyerid;
 	}
 
 	public String getName() {
-		return name;
+		return NAME;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.NAME = name;
 	}
 
 	public String getPassword() {
-		return password;
+		return PASSWORD;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.PASSWORD = password;
 	}
 
 	public String getEmail() {
-		return email;
+		return EMAIL;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.EMAIL = email;
 	}
 
 	public String getPhoneNumber() {
@@ -71,27 +71,27 @@ public class BuyerDTO {
 	}
 
 	public String getIsPrivileged() {
-		return isPrivileged;
+		return ISPRIVILEGED;
 	}
 
 	public void setIsPrivileged(String isPrivileged) {
-		this.isPrivileged = isPrivileged;
+		this.ISPRIVILEGED = isPrivileged;
 	}
 
 	public String getRewardPoints() {
-		return rewardPoints;
+		return REWARDPOINTS;
 	}
 
 	public void setRewardPoints(String rewardPoints) {
-		this.rewardPoints = rewardPoints;
+		this.REWARDPOINTS = rewardPoints;
 	}
 
 	public String getIsActive() {
-		return isActive;
+		return ISACTIVE;
 	}
 
 	public void setIsActive(String isActive) {
-		this.isActive = isActive;
+		this.ISACTIVE = isActive;
 	}
 	
 	// Converts Entity into DTO
@@ -124,9 +124,9 @@ public class BuyerDTO {
 
 	@Override
 	public String toString() {
-		return "BuyerDTO [buyerid=" + buyerid + ", name=" + name + ", password=" + password + ", email=" + email
-				+ ", phoneNumber=" + PHONENUMBER + ", isPrivileged=" + isPrivileged + ", rewardPoints=" + rewardPoints
-				+ ", isActive=" + isActive + "]";
+		return "BuyerDTO [buyerid=" + BUYERID + ", name=" + NAME + ", password=" + PASSWORD + ", email=" + EMAIL
+				+ ", phoneNumber=" + PHONENUMBER + ", isPrivileged=" + ISPRIVILEGED + ", rewardPoints=" + REWARDPOINTS
+				+ ", isActive=" + ISACTIVE + "]";
 	}
 	
 	

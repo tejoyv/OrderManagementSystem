@@ -1,5 +1,9 @@
 package com.project.Order.service;
 
-public interface OrderService {
+import java.util.List;
 
+import com.project.Order.dto.OrderdetailsDTO;
+
+public interface OrderService {
+	public List<OrderdetailsDTO> getAllOrders() throws OrderMSException;
 }
