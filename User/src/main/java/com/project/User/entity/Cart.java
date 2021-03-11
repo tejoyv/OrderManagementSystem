@@ -16,17 +16,17 @@ public class Cart {
 	@Id
 	int PRODID;
 	@Column(nullable = false)
-	int quantity;
+	int QUANTITY;
 	
 	public Cart() {
 		super();
 	}
 
-	public Cart(int BUYERID, int PRODID, int quantity) {
+	public Cart(int BUYERID, int PRODID, int QUANTITY) {
 		super();
 		this.BUYERID = BUYERID;
 		this.PRODID = PRODID;
-		this.quantity = quantity;
+		this.QUANTITY = QUANTITY;
 	}
 
 	public int getBUYERID() {
@@ -45,12 +45,12 @@ public class Cart {
 		this.PRODID = PRODID;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getQUANTITY() {
+		return QUANTITY;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQUANTITY(int QUANTITY) {
+		this.QUANTITY = QUANTITY;
 	}
 	
 	

@@ -42,11 +42,19 @@ public class BuyerProductId implements Serializable {
 		return true;
 	}
 
-	
+	public int getBUYERID() {
+		return BUYERID;
+	}
 
-	
-	
-	
+	public void setBUYERID(int bUYERID) {
+		BUYERID = bUYERID;
+	}
 
-   
+	public int getPRODID() {
+		return PRODID;
+	}
+
+	public void setPRODID(int pRODID) {
+		PRODID = pRODID;
+	}	
 }
