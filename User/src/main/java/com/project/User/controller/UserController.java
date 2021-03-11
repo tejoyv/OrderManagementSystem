@@ -2,8 +2,6 @@ package com.project.User.controller;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
+import com.project.User.dto.CartDTO;
 import com.project.User.dto.SellerDTO;
+import com.project.User.dto.WishlistDTO;
 import com.project.User.service.UserService;
 
 @RestController
@@ -154,6 +154,71 @@ public class UserController {
 		}
 		return response;
 	}
+	
+	// adding product to wishlist (Buyer)
+	@PostMapping(value = "/api/wishlist/add")
+	public ResponseEntity<String> addToWishlist(@RequestBody WishlistDTO wishlistDTO)
+	{
+		logger.info("Product wishlisted successfully for buyer {}", wishlistDTO);
+		ResponseEntity<String> response;
+		String successMessage = "Product wishlisted successfully !!!!!!!";
+		String errorMessage = "Duplicate product found !!!!!!!";
+		if(userService.addBuyerWishlist(wishlistDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);	
+		}else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		
+		return response;
+	}
+	
+	//adding product to cart (Buyer)
+	@PostMapping(value = "/api/cart/add")
+	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO){
+		logger.info("Product added to cart successfully for buyer {}",cartDTO);
+		ResponseEntity<String>response;
+		String successMessage = "Product added to cart successfully !!!!!!!";
+		String errorMessage = "Duplicate entry found !!!!!!!";
+		if(userService.addToCart(cartDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+	
+	//removing product from wishlist (Buyer)
+	@DeleteMapping(value="/api/wishlist/remove")
+	public ResponseEntity<String> removeFromWishlist(@RequestBody WishlistDTO wishlistDTO){
+		logger.info("Product removed from Wishlist  {}", wishlistDTO);
+		ResponseEntity<String> response;
+		String successMessage = "Product removed from Wishlist successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		if(userService.removeProductFromWishlist(wishlistDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+	
+	//removing product from wishlist (Buyer)
+	@DeleteMapping(value="/api/cart/remove")
+	public ResponseEntity<String> removeFromCart(@RequestBody CartDTO cartDTO){
+		logger.info("Product removed from Cart  {}", cartDTO);
+		ResponseEntity<String> response;
+		String successMessage = "Product removed from Cart successfully !!!!!!!";
+		String errorMessage = "Something went wrong !!!!!!!";
+		if(userService.removeProductFromCart(cartDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+
 
 }
 
