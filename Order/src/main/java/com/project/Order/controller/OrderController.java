@@ -15,7 +15,9 @@ import com.project.Order.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -54,7 +56,7 @@ public class OrderController {
 	
 	//Place an Order
 	@PostMapping(value="/api/placeOrder")
-	public ProductDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
+	public ResponseEntity<String> placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
 		RestTemplate restTemplate = new RestTemplate();
 		int buyerid = orderdetailsDTO.getBUYERID();
 		String carturl = userUrl+"getcart/{buyerid}";
@@ -76,8 +78,8 @@ public class OrderController {
 		neworderdetailsDTO.setSTATUS("ORDER PLACED");
 		Orderdetails orderdetails = neworderdetailsDTO.createEntity();
 		orderRepository.save(orderdetails);
-		
-		return productDTO;
+		ResponseEntity<String> response = new ResponseEntity<String>("Order placed successfully!!!", HttpStatus.OK);
+		return response;
 	}
 
 }
