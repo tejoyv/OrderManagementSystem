@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -228,7 +229,78 @@ public class UserController {
 		}
 		return response;
 	}
-
+	 
+	// inactivate a buyer
+	@PostMapping(value="/api/buyer/inactivate")
+	public ResponseEntity<String> temporarilyInactivateBuyer(@RequestBody BuyerDTO buyerDTO)
+	{
+		logger.info("Buyer inactivated  {}", buyerDTO);
+		ResponseEntity<String> response;
+		String successMessage = " Buyer inactivated successfully !!!!!!!";
+		String errorMessage = "Error in inactivation !!!!!!!";
+		if(userService.inactivateBuyer(buyerDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+		
+	}
+	
+	// activate a buyer
+	@PostMapping(value="/api/buyer/activate")
+	public ResponseEntity<String> temporarilyActivateBuyer(@RequestBody BuyerDTO buyerDTO)
+	{
+		logger.info("Buyer activated  {}", buyerDTO);
+		ResponseEntity<String> response;
+		String successMessage = " Buyer activated successfully !!!!!!!";
+		String errorMessage = "Error in activation !!!!!!!";
+		if(userService.activateBuyer(buyerDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+		
+	}
+	
+	// inactivate a seller
+	@PostMapping(value="/api/seller/inactivate")
+	public ResponseEntity<String> temporarilyInactivateSeller(@RequestBody SellerDTO sellerDTO)
+	{
+		logger.info("Seller inactivated  {}", sellerDTO);
+		ResponseEntity<String> response;
+		String successMessage = "Seller inactivated successfully !!!!!!!";
+		String errorMessage = "Error in inactivation !!!!!!!";
+		if(userService.inactivateSeller(sellerDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+		
+	}
+	
+	// activate a buyer
+	@PostMapping(value="/api/seller/activate")
+	public ResponseEntity<String> temporarilyActivateSeller(@RequestBody SellerDTO sellerDTO)
+	{
+		logger.info("Seller activated  {}", sellerDTO);
+		ResponseEntity<String> response;
+		String successMessage = " Seller activated successfully !!!!!!!";
+		String errorMessage = "Error in activation !!!!!!!";
+		if(userService.activateSeller(sellerDTO)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}
+		else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+		
+	}
 
 }
 

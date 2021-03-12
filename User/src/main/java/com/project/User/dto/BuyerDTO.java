@@ -9,16 +9,16 @@ public class BuyerDTO {
 	String PASSWORD;
 	String EMAIL;
 	String PHONENUMBER;
-	String ISPRIVILEGED;
-	String REWARDPOINTS;
-	String ISACTIVE;
+	int ISPRIVILEGED;
+	int REWARDPOINTS;
+	int ISACTIVE;
 	
 	public BuyerDTO() {
 		super();
 	}
 
-	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, String isPrivileged,
-			String rewardPoints, String isActive) {
+	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, int isPrivileged,
+			int rewardPoints, int isActive) {
 		super();
 		this.BUYERID = buyerid;
 		this.NAME = name;
@@ -70,27 +70,27 @@ public class BuyerDTO {
 		this.PHONENUMBER = phoneNumber;
 	}
 
-	public String getIsPrivileged() {
+	public int getIsPrivileged() {
 		return ISPRIVILEGED;
 	}
 
-	public void setIsPrivileged(String isPrivileged) {
+	public void setIsPrivileged(int isPrivileged) {
 		this.ISPRIVILEGED = isPrivileged;
 	}
 
-	public String getRewardPoints() {
+	public int getRewardPoints() {
 		return REWARDPOINTS;
 	}
 
-	public void setRewardPoints(String rewardPoints) {
+	public void setRewardPoints(int rewardPoints) {
 		this.REWARDPOINTS = rewardPoints;
 	}
 
-	public String getIsActive() {
+	public int getIsActive() {
 		return ISACTIVE;
 	}
 
-	public void setIsActive(String isActive) {
+	public void setIsActive(int isActive) {
 		this.ISACTIVE = isActive;
 	}
 	

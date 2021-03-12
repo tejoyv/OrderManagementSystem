@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +51,14 @@ public class UserService {
 	@Autowired
 	Validator validator;
 	
+	@Autowired
+	EntityManager entityManager;
+	
 	public void registerBuyer(BuyerDTO buyerDTO) throws Exception {
 		logger.info("Register request for buyer {}", buyerDTO);
 		validator.validateBuyer(buyerDTO);
 		Optional<Buyer> buyerphone = buyerRepository.findByPHONENUMBER(buyerDTO.getPhoneNumber());
 		Buyer buyeremail = buyerRepository.findByEMAIL(buyerDTO.getEmail());
-		System.out.println(buyeremail);
 		if(buyerphone.isPresent()) {
 			System.out.println("in user phone number valid");
 			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
@@ -69,7 +75,6 @@ public class UserService {
 		validator.validateSeller(sellerDTO);
 		Optional<Seller> sellerphone = sellerRepository.findByPHONENUMBER(sellerDTO.getPhoneNumber());
 		Seller selleremail = sellerRepository.findByEMAIL(sellerDTO.getEmail());
-		System.out.println(selleremail);
 		if(sellerphone.isPresent()) {
 			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
 		}
@@ -227,5 +232,54 @@ public class UserService {
 			return false;
 		}
 	}
-
+	
+	//inactivate a buyer
+	public boolean inactivateBuyer(BuyerDTO buyerDTO)
+	{
+		Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
+		if(buyer!=null) {
+			buyer.setIsActive(0);
+			buyerRepository.save(buyer);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	//activate a buyer
+		public boolean activateBuyer(BuyerDTO buyerDTO)
+		{
+			Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
+			if(buyer!=null) {
+				buyer.setIsActive(1);
+				buyerRepository.save(buyer);
+				return true;
+			}else {
+				return false;
+			}
+		}
+		
+		//inactivate a seller
+		public boolean inactivateSeller(SellerDTO sellerDTO)
+		{
+			Seller seller = sellerRepository.findByEMAIL(sellerDTO.getEmail());
+			if(seller!=null) {
+				seller.setISACTIVE(0);
+				sellerRepository.save(seller);
+				return true;
+			}else {
+				return false;
+			}
+		}
+		//activate a seller
+		public boolean activateSeller(SellerDTO sellerDTO)
+		{
+			Seller seller= sellerRepository.findByEMAIL(sellerDTO.getEmail());
+			if(seller!=null) {
+				seller.setISACTIVE(1);
+				sellerRepository.save(seller);
+				return true;
+			}else {
+				return false;
+			}
+		}
 }
