@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
@@ -91,7 +93,7 @@ public class UserService {
 		boolean status=false;
 		Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
 		if(buyer!=null) {
-			System.out.println("Print");
+			//System.out.println("Print");
 			//Buyer buyer1 = buyer.get();
 			if (buyer.getPassword().equals(buyerDTO.getPassword())) {
 				status=true;
@@ -231,6 +233,13 @@ public class UserService {
 		}else {
 			return false;
 		}
+	}
+	
+	//get CART items
+	public CartDTO getCart(int buyerid){
+		Cart cart = cartRepository.findByBUYERID(buyerid);
+		CartDTO cartDTO = CartDTO.valueOf(cart);
+		return cartDTO;
 	}
 	
 	//inactivate a buyer
