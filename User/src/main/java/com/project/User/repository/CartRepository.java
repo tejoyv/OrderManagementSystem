@@ -7,5 +7,5 @@ import com.project.User.entity.Cart;
 import com.project.User.entity.Wishlist;
 
 public interface CartRepository extends JpaRepository<Cart, BuyerProductId>{
-	
+	public Cart findByBUYERID(int buyerid);
 }
