@@ -23,6 +23,7 @@ import com.project.User.dto.BuyerDTO;
 import com.project.User.dto.CartDTO;
 import com.project.User.dto.SellerDTO;
 import com.project.User.dto.WishlistDTO;
+import com.project.User.entity.Cart;
 import com.project.User.service.UserService;
 
 @RestController
@@ -196,6 +197,13 @@ public class UserController {
 			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
 		}
 		return response;
+	}
+	
+	//Get cart
+	@GetMapping(value="/api/getcart/{buyerid}")
+	public CartDTO getCart(@PathVariable Integer buyerid){
+		CartDTO cartDTO = userService.getCart(buyerid);
+		return cartDTO;
 	}
 	
 	//removing product from wishlist (Buyer)

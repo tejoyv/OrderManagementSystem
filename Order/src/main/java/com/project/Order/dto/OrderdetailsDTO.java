@@ -7,18 +7,18 @@ import java.sql.Date;
 import com.project.Order.entity.*;
 
 public class OrderdetailsDTO {
-	int orderId;
-	int buyerId;
+	int orderid;
+	int buyerid;
 	double amount;
 	Date date;
 	String address;
 	String status;
 
 	//parameterised constructor
-	public OrderdetailsDTO(int orderId, int buyerId, double amount, Date date, String address, String status) {
+	public OrderdetailsDTO(int orderid, int buyerid, double amount, Date date, String address, String status) {
 		super();
-		this.orderId = orderId;
-		this.buyerId = buyerId;
+		this.orderid = orderid;
+		this.buyerid = buyerid;
 		this.amount = amount;
 		this.date = date;
 		this.address = address;
@@ -32,16 +32,16 @@ public class OrderdetailsDTO {
 	
 	//getters and setters
 		public int getOrderId() {
-			return orderId;
+			return orderid;
 		}
-		public void setOrderId(int orderId) {
-			this.orderId = orderId;
+		public void setOrderId(int orderid) {
+			this.orderid = orderid;
 		}
 		public int getBuyerId() {
-			return buyerId;
+			return buyerid;
 		}
-		public void setBuyerId(int buyerId) {
-			this.buyerId = buyerId;
+		public void setBuyerId(int buyerid) {
+			this.buyerid = buyerid;
 		}
 		public double getAmount() {
 			return amount;
@@ -70,7 +70,7 @@ public class OrderdetailsDTO {
 
 		@Override
 		public String toString() {
-			return "OrderdetailsDTO [orderId=" + orderId + ", buyerId=" + buyerId + ", amount=" + amount + ", date="
+			return "OrderdetailsDTO [orderId=" + orderid + ", buyerId=" + buyerid + ", amount=" + amount + ", date="
 					+ date + ", address=" + address + ", status=" + status + "]";
 		}
 

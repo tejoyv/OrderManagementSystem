@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import com.project.Order.service.OrderMSException;
 import com.project.Order.service.OrderService;
+import com.project.Order.dto.CartDTO;
 import com.project.Order.dto.OrderdetailsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @CrossOrigin
@@ -37,7 +39,16 @@ public class OrderController {
 		return order;
 	}
 	
-	//
-	
+	//Place an Order
+	@PostMapping(value="/api/placeOrder")
+	public CartDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
+		int buyerid = orderdetailsDTO.getBuyerId();
+		System.out.println(buyerid);
+		String carturl = "http://localhost:8300/api/getcart/{buyerid}";
+		//String producturl = "http://localhost:8200/api/getcart/{buyerid}";
+		RestTemplate restTemplate = new RestTemplate();
+		CartDTO cartDTO = restTemplate.getForObject(carturl, CartDTO.class, buyerid);
+		return cartDTO;
+	}
 
 }
