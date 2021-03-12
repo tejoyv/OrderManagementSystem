@@ -44,4 +44,6 @@ public class ProductController {
 		logger.info("Product details for product name {}", productname);
 		return productService.getProductByName(productname);
 	}
+	
+	
 }
