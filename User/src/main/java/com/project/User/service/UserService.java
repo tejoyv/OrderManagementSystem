@@ -44,13 +44,38 @@ public class UserService {
 	@Autowired
 	Environment environment;
 	
-	public void registerBuyer(BuyerDTO buyerDTO) {
+	@Autowired
+	Validator validator;
+	
+	public void registerBuyer(BuyerDTO buyerDTO) throws Exception {
 		logger.info("Register request for buyer {}", buyerDTO);
+		validator.validateBuyer(buyerDTO);
+		Optional<Buyer> buyerphone = buyerRepository.findByPHONENUMBER(buyerDTO.getPhoneNumber());
+		Buyer buyeremail = buyerRepository.findByEMAIL(buyerDTO.getEmail());
+		System.out.println(buyeremail);
+		if(buyerphone.isPresent()) {
+			System.out.println("in user phone number valid");
+			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+		}
+		if(buyeremail != null) {
+			System.out.println("in user email valid");
+			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+		}
 		Buyer buyer = buyerDTO.createEntity();
 		buyerRepository.save(buyer);
 	}
-	public void registerSeller(SellerDTO sellerDTO) {
-		logger.info("Register request for buyer {}", sellerDTO);
+	public void registerSeller(SellerDTO sellerDTO) throws Exception {
+		logger.info("Register request for seller {}", sellerDTO);
+		validator.validateSeller(sellerDTO);
+		Optional<Seller> sellerphone = sellerRepository.findByPHONENUMBER(sellerDTO.getPhoneNumber());
+		Seller selleremail = sellerRepository.findByEMAIL(sellerDTO.getEmail());
+		System.out.println(selleremail);
+		if(sellerphone.isPresent()) {
+			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+		}
+		if(selleremail != null) {
+			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+		}
 		Seller seller = sellerDTO.createEntity();
 		sellerRepository.save(seller);
 	}

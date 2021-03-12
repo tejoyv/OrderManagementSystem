@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
@@ -36,26 +37,35 @@ public class UserController {
 	
 	// Register a new buyer
 	@PostMapping(value="/api/buyer/register")
-	public void registerBuyer(@RequestBody BuyerDTO buyerDTO) {
-		logger.info("Registeration successful for buyer {}", buyerDTO);
-		userService.registerBuyer(buyerDTO);
-//		ResponseEntity<String> response;
-//		if(Validator.validateBuyer(buyerDTO)) {
-//			String successMessage = "Buyer added successfully";
-//			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
-//		}else {
-//			
-//		}
-//		return response;
+	public ResponseEntity<String> registerBuyer(@RequestBody BuyerDTO buyerDTO) {
+		ResponseEntity<String> response;
+		try {
+			userService.registerBuyer(buyerDTO);
+			logger.info("Registeration successful for buyer {}", buyerDTO);
+			String successMessage = "Buyer added successfully";
+			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
+		}
+		catch(Exception e)
+		{
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return response;
 	}
 	
 	// Register a new seller
 	@PostMapping(value="/api/seller/register")
 	public ResponseEntity<String> registerSeller(@RequestBody SellerDTO sellerDTO) {
-		logger.info("Registeration successful for seller {}", sellerDTO);
-		userService.registerSeller(sellerDTO);
-		String successMessage = "Seller added successfully !!!!!!";
-		ResponseEntity<String> response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
+		ResponseEntity<String> response;
+		try {
+			userService.registerSeller(sellerDTO);
+			logger.info("Registeration successful for seller {}", sellerDTO);
+			String successMessage = "Seller added successfully";
+			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
+		}
+		catch(Exception e)
+		{
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 		return response;
 	}
 	
