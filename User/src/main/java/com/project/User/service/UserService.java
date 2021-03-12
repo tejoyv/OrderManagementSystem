@@ -12,11 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
+import com.project.User.dto.CartDTO;
 import com.project.User.dto.SellerDTO;
+import com.project.User.dto.WishlistDTO;
 import com.project.User.entity.Buyer;
+import com.project.User.entity.BuyerProductId;
+import com.project.User.entity.Cart;
 import com.project.User.entity.Seller;
+import com.project.User.entity.Wishlist;
 import com.project.User.repository.BuyerRepository;
+import com.project.User.repository.CartRepository;
 import com.project.User.repository.SellerRepository;
+import com.project.User.repository.WishlistRepository;
 
 @Service
 public class UserService {
@@ -29,15 +36,46 @@ public class UserService {
 	SellerRepository sellerRepository;
 	
 	@Autowired
+	WishlistRepository wishlistRespository;
+	
+	@Autowired
+	CartRepository cartRepository;
+	
+	@Autowired
 	Environment environment;
 	
-	public void registerBuyer(BuyerDTO buyerDTO) {
+	@Autowired
+	Validator validator;
+	
+	public void registerBuyer(BuyerDTO buyerDTO) throws Exception {
 		logger.info("Register request for buyer {}", buyerDTO);
+		validator.validateBuyer(buyerDTO);
+		Optional<Buyer> buyerphone = buyerRepository.findByPHONENUMBER(buyerDTO.getPhoneNumber());
+		Buyer buyeremail = buyerRepository.findByEMAIL(buyerDTO.getEmail());
+		System.out.println(buyeremail);
+		if(buyerphone.isPresent()) {
+			System.out.println("in user phone number valid");
+			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+		}
+		if(buyeremail != null) {
+			System.out.println("in user email valid");
+			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+		}
 		Buyer buyer = buyerDTO.createEntity();
 		buyerRepository.save(buyer);
 	}
-	public void registerSeller(SellerDTO sellerDTO) {
-		logger.info("Register request for buyer {}", sellerDTO);
+	public void registerSeller(SellerDTO sellerDTO) throws Exception {
+		logger.info("Register request for seller {}", sellerDTO);
+		validator.validateSeller(sellerDTO);
+		Optional<Seller> sellerphone = sellerRepository.findByPHONENUMBER(sellerDTO.getPhoneNumber());
+		Seller selleremail = sellerRepository.findByEMAIL(sellerDTO.getEmail());
+		System.out.println(selleremail);
+		if(sellerphone.isPresent()) {
+			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+		}
+		if(selleremail != null) {
+			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+		}
 		Seller seller = sellerDTO.createEntity();
 		sellerRepository.save(seller);
 	}
@@ -117,4 +155,77 @@ public class UserService {
 		sellerRepository.deleteById(id);
 	}
 	
+	//de-activate buyer account
+	public boolean deleteBuyer(String email) {
+		Buyer buyer = buyerRepository.findByEMAIL(email);
+		if(buyer!=null) {
+			buyerRepository.deleteById(buyer.getBuyerId());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//de-activate buyer account
+	public boolean deleteSeller(String email) {
+		Seller seller = sellerRepository.findByEMAIL(email);
+		if(seller!=null) {
+			sellerRepository.deleteById(seller.getSellerId());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	// add product to wishlist (buyer)
+	public boolean addBuyerWishlist(WishlistDTO wishlistDTO) {
+		Optional<Wishlist> wishlist = wishlistRespository.findById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()));
+		if(!wishlist.isPresent()) {
+			Wishlist wishlist1 = wishlistDTO.createEntity();
+			wishlistRespository.save(wishlist1);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	// add product to cart (Buyer)
+	public boolean addToCart(CartDTO cartDTO) {
+		Optional<Cart> cart = cartRepository.findById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()));
+		if(!cart.isPresent()) {
+			Cart cart1 = cartDTO.createEntity();
+			cartRepository.save(cart1);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
+	// remove product from wishlist
+	public boolean removeProductFromWishlist(WishlistDTO wishlistDTO) {
+		Optional<Wishlist> wishlist = wishlistRespository.findById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()));
+		if(wishlist.isPresent()) {
+			wishlistRespository.deleteById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()) );
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	//remove product from cart
+	public boolean removeProductFromCart(CartDTO cartDTO) {
+		Optional<Cart> cart = cartRepository.findById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()));
+		if(cart.isPresent()) {
+			cartRepository.deleteById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()) );
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }
