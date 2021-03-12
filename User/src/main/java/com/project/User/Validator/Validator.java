@@ -1,38 +1,46 @@
 package com.project.User.Validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+
 import com.project.User.dto.BuyerDTO;
 import com.project.User.dto.SellerDTO;
 
-
+@Component
 public class Validator {
-	public static void validateBuyer(BuyerDTO buyer) throws Exception {
+	
+	@Autowired
+	Environment environment;
+	
+	public void validateBuyer(BuyerDTO buyer) throws Exception {
 		if(!validateName(buyer.getName())) {
-			throw new Exception("Validator.INVALID_NAME");
+			throw new Exception(environment.getProperty("INVALID_NAME"));
 		}
 		if(!validateEmail(buyer.getEmail())){
-			throw new Exception("Validator.INVALID_EMAIL");
+			throw new Exception(environment.getProperty("INVALID_EMAIL"));
 		}
 		if(!validatePassword(buyer.getPassword())) {
-			throw new Exception("Validator.INVALID_PASSWORD");
+			throw new Exception(environment.getProperty("INVALID_PASSWORD"));
 		}
 		if(!validatePhoneNumber(buyer.getPhoneNumber())) {
-			throw new Exception("Validator.INVALID_PHONENUMBER");
+			throw new Exception(environment.getProperty("INVALID_PHONENUMBER"));
 		}
 		
 	}
 	
-	public static void validateSeller(SellerDTO seller) throws Exception {
+	public void validateSeller(SellerDTO seller) throws Exception {
 		if(!validateName(seller.getName())) {
-			throw new Exception("Validator.INVALID_NAME");
+			throw new Exception(environment.getProperty("INVALID_NAME"));
 		}
 		if(!validateEmail(seller.getEmail())){
-			throw new Exception("Validator.INVALID_EMAIL");
+			throw new Exception(environment.getProperty("INVALID_EMAIL"));
 		}
 		if(!validatePassword(seller.getPassword())) {
-			throw new Exception("Validator.INVALID_PASSWORD");
+			throw new Exception(environment.getProperty("INVALID_PASSWORD"));
 		}
 		if(!validatePhoneNumber(seller.getPhoneNumber())) {
-			throw new Exception("Validator.INVALID_PHONENUMBER");
+			throw new Exception(environment.getProperty("INVALID_PHONENUMBER"));
 		}
 		
 	}
@@ -56,7 +64,7 @@ public class Validator {
 	}
 	
 	public static boolean validatePassword(String password) throws Exception{
-		String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8, 20}$";
+		String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
 		if(password.matches(regex)) {
 			return true;
 		}
