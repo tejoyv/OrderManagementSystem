@@ -8,12 +8,12 @@ import com.project.Order.entity.ProductsOrdered;
 
 public class ProductsOrderedDTO {
 	
-	int orderId;
-	int prodId;
-	int sellerId;
-	int quantity;
-	String status;
-	double price;
+	int ORDERID;
+	int PRODID;
+	int SELLERID;
+	int QUANTITY;
+	String STATUS;
+	double PRICE;
 	
 	//parameterless constructor
 	public ProductsOrderedDTO() {
@@ -21,69 +21,69 @@ public class ProductsOrderedDTO {
 	}
 
 	//parameterised constructor
-	public ProductsOrderedDTO(int orderId, int prodId, int sellerId, int quantity, String status, double price) {
+	public ProductsOrderedDTO(int ORDERID, int PRODID, int SELLERID, int QUANTITY, String STATUS, double PRICE) {
 		super();
-		this.orderId = orderId;
-		this.prodId = prodId;
-		this.sellerId = sellerId;
-		this.quantity = quantity;
-		this.status = status;
-		this.price = price;
+		this.ORDERID = ORDERID;
+		this.PRODID = PRODID;
+		this.SELLERID = SELLERID;
+		this.QUANTITY = QUANTITY;
+		this.STATUS = STATUS;
+		this.PRICE = PRICE;
 	}
 
 	//getters and setters
-	public int getOrderId() {
-		return orderId;
+	public int getORDERID() {
+		return ORDERID;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setORDERID(int ORDERID) {
+		this.ORDERID = ORDERID;
 	}
-	public int getProdId() {
-		return prodId;
+	public int getPRODID() {
+		return PRODID;
 	}
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
-	public int getSellerId() {
-		return sellerId;
+	public int getSELLERID() {
+		return SELLERID;
 	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSELLERID(int SELLERID) {
+		this.SELLERID = SELLERID;
 	}
-	public int getQuantity() {
-		return quantity;
+	public int getQUANTITY() {
+		return QUANTITY;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQUANTITY(int QUANTITY) {
+		this.QUANTITY = QUANTITY;
 	}
-	public String getStatus() {
-		return status;
+	public String getSTATUS() {
+		return STATUS;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSTATUS(String STATUS) {
+		this.STATUS = STATUS;
 	}
-	public double getPrice() {
-		return price;
+	public double getPRICE() {
+		return PRICE;
 	}
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPRICE(double PRICE) {
+		this.PRICE = PRICE;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductsOrderedDTO [orderId=" + orderId + ", prodId=" + prodId + ", sellerId=" + sellerId
-				+ ", quantity=" + quantity + ", status=" + status + ", price=" + price + "]";
+		return "ProductsOrderedDTO [ORDERID=" + ORDERID + ", PRODID=" + PRODID + ", SELLERID=" + SELLERID
+				+ ", QUANTITY=" + QUANTITY + ", STATUS=" + STATUS + ", PRICE=" + PRICE + "]";
 	}
 	
 	
 	public static ProductsOrderedDTO valueOf(ProductsOrdered productsOrdered) {
 		ProductsOrderedDTO productsOrderedDTO = new ProductsOrderedDTO();
-		productsOrderedDTO.setOrderId(productsOrdered.getOrderId());
-		productsOrderedDTO.setProdId(productsOrdered.getProdId());
-		productsOrderedDTO.setSellerId(productsOrdered.getSellerId());
-		productsOrderedDTO.setQuantity(productsOrdered.getQuantity());
-		productsOrderedDTO.setPrice(productsOrdered.getPrice());
-		productsOrderedDTO.setStatus(productsOrdered.getStatus());
+		productsOrderedDTO.setORDERID(productsOrdered.getORDERID());
+		productsOrderedDTO.setPRODID(productsOrdered.getPRODID());
+		productsOrderedDTO.setSELLERID(productsOrdered.getSELLERID());
+		productsOrderedDTO.setQUANTITY(productsOrdered.getQUANTITY());
+		productsOrderedDTO.setPRICE(productsOrdered.getPRICE());
+		productsOrderedDTO.setSTATUS(productsOrdered.getSTATUS());
 		return productsOrderedDTO;
 		
 	}

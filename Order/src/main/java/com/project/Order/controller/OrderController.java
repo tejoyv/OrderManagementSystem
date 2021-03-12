@@ -8,7 +8,12 @@ import com.project.Order.service.OrderMSException;
 import com.project.Order.service.OrderService;
 import com.project.Order.dto.CartDTO;
 import com.project.Order.dto.OrderdetailsDTO;
+import com.project.Order.dto.ProductDTO;
+import com.project.Order.entity.Orderdetails;
+import com.project.Order.repository.OrderRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +27,13 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	OrderRepository orderRepository;
+	
+	@Value("${userUrl}")
+	public String userUrl;
+	@Value("${productUrl}")
+	public String productUrl;
 	
 	//Fetches all Orders
 	@GetMapping(value = "/api/orders", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,14 +53,28 @@ public class OrderController {
 	
 	//Place an Order
 	@PostMapping(value="/api/placeOrder")
-	public CartDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
-		int buyerid = orderdetailsDTO.getBuyerId();
-		System.out.println(buyerid);
-		String carturl = "http://localhost:8300/api/getcart/{buyerid}";
-		//String producturl = "http://localhost:8200/api/getcart/{buyerid}";
+	public ProductDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
 		RestTemplate restTemplate = new RestTemplate();
+		int buyerid = orderdetailsDTO.getBUYERID();
+		String carturl = userUrl+"getcart/{buyerid}";
+		String producturl = productUrl+"productid/{prodid}";
 		CartDTO cartDTO = restTemplate.getForObject(carturl, CartDTO.class, buyerid);
-		return cartDTO;
+		int prodid = cartDTO.getPRODID();
+		ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
+		int price = (int) productDTO.getPRICE();
+		int quantity = cartDTO.getQUANTITY();
+		int amount = price*quantity;
+		System.out.println(amount);
+		
+		//Save to Order details table
+		OrderdetailsDTO neworderdetailsDTO = new OrderdetailsDTO();
+		neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
+		neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
+		neworderdetailsDTO.setAMOUNT(amount);
+		Orderdetails orderdetails = neworderdetailsDTO.createEntity();
+		orderRepository.save(orderdetails);
+		
+		return productDTO;
 	}
 
 }

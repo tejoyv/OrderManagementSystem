@@ -8,17 +8,17 @@ import javax.persistence.*;
 public class ProductsOrdered {
 	
 	@Id
-	int orderid;
+	int ORDERID;
 	@Id
-	int prodid;
+	int PRODID;
 	@Column(nullable = false)
-	int sellerid;
+	int SELLERID;
 	@Column(nullable = false)
-	int quantity;
+	int QUANTITY;
 	@Column(nullable = false)
-	String status;
+	String STATUS;
 	@Column(nullable = false)
-	double price;
+	double PRICE;
 	
 	//parameterless constructor
 	public ProductsOrdered() {
@@ -26,56 +26,56 @@ public class ProductsOrdered {
 	}
 
 	//parameterised constructor
-	public ProductsOrdered(int orderid, int prodid, int sellerid, int quantity, String status, double price) {
+	public ProductsOrdered(int ORDERID, int PRODID, int SELLERID, int QUANTITY, String STATUS, double PRICE) {
 		super();
-		this.orderid = orderid;
-		this.prodid = prodid;
-		this.sellerid = sellerid;
-		this.quantity = quantity;
-		this.status = status;
-		this.price = price;
+		this.ORDERID = ORDERID;
+		this.PRODID = PRODID;
+		this.SELLERID = SELLERID;
+		this.QUANTITY = QUANTITY;
+		this.STATUS = STATUS;
+		this.PRICE = PRICE;
 	}
 
 	//getters and setters
-	public int getOrderId() {
-		return orderid;
+	public int getORDERID() {
+		return ORDERID;
 	}
-	public void setOrderId(int orderid) {
-		this.orderid = orderid;
+	public void setORDERID(int ORDERID) {
+		this.ORDERID = ORDERID;
 	}
-	public int getProdId() {
-		return prodid;
+	public int getPRODID() {
+		return PRODID;
 	}
-	public void setProdId(int prodid) {
-		this.prodid = prodid;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
-	public int getSellerId() {
-		return sellerid;
+	public int getSELLERID() {
+		return SELLERID;
 	}
-	public void setSellerId(int sellerid) {
-		this.sellerid = sellerid;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public String getStatus() {
-		return status;
+	public void setSELLERID(int SELLERID) {
+		this.SELLERID = SELLERID;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public int getQUANTITY() {
+		return QUANTITY;
+	}
+	public void setQUANTITY(int QUANTITY) {
+		this.QUANTITY = QUANTITY;
+	}
+	public String getSTATUS() {
+		return STATUS;
 	}
 
-	public double getPrice() {
-		return price;
+	public void setSTATUS(String STATUS) {
+		this.STATUS = STATUS;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public double getPRICE() {
+		return PRICE;
+	}
+
+	public void setPRICE(double PRICE) {
+		this.PRICE = PRICE;
 	}
 	
 	

@@ -7,22 +7,22 @@ import java.sql.Date;
 import com.project.Order.entity.*;
 
 public class OrderdetailsDTO {
-	int orderid;
-	int buyerid;
-	double amount;
-	Date date;
-	String address;
-	String status;
+	int ORDERID;
+	int BUYERID;
+	double AMOUNT;
+	Date DATE;
+	String ADDRESS;
+	String STATUS;
 
 	//parameterised constructor
-	public OrderdetailsDTO(int orderid, int buyerid, double amount, Date date, String address, String status) {
+	public OrderdetailsDTO(int ORDERID, int BUYERID, double AMOUNT, Date date, String ADDRESS, String STATUS) {
 		super();
-		this.orderid = orderid;
-		this.buyerid = buyerid;
-		this.amount = amount;
-		this.date = date;
-		this.address = address;
-		this.status = status;
+		this.ORDERID = ORDERID;
+		this.BUYERID = BUYERID;
+		this.AMOUNT = AMOUNT;
+		this.DATE = date;
+		this.ADDRESS = ADDRESS;
+		this.STATUS = STATUS;
 	}
 	
 	//parameterless constructor
@@ -31,62 +31,73 @@ public class OrderdetailsDTO {
 	}
 	
 	//getters and setters
-		public int getOrderId() {
-			return orderid;
+		public int getORDERID() {
+			return ORDERID;
 		}
-		public void setOrderId(int orderid) {
-			this.orderid = orderid;
+		public void setORDERID(int ORDERID) {
+			this.ORDERID = ORDERID;
 		}
-		public int getBuyerId() {
-			return buyerid;
+		public int getBUYERID() {
+			return BUYERID;
 		}
-		public void setBuyerId(int buyerid) {
-			this.buyerid = buyerid;
+		public void setBUYERID(int BUYERID) {
+			this.BUYERID = BUYERID;
 		}
-		public double getAmount() {
-			return amount;
+		public double getAMOUNT() {
+			return AMOUNT;
 		}
-		public void setAmount(double amount) {
-			this.amount = amount;
+		public void setAMOUNT(double AMOUNT) {
+			this.AMOUNT = AMOUNT;
 		}
 		public Date getDate() {
-			return date;
+			return DATE;
 		}
 		public void setDate(Date date) {
-			this.date = date;
+			this.DATE = date;
 		}
-		public String getAddress() {
-			return address;
+		public String getADDRESS() {
+			return ADDRESS;
 		}
-		public void setAddress(String address) {
-			this.address = address;
+		public void setADDRESS(String ADDRESS) {
+			this.ADDRESS = ADDRESS;
 		}
-		public String getStatus() {
-			return status;
+		public String getSTATUS() {
+			return STATUS;
 		}
-		public void setStatus(String status) {
-			this.status = status;
+		public void setSTATUS(String STATUS) {
+			this.STATUS = STATUS;
 		}
 
 		@Override
 		public String toString() {
-			return "OrderdetailsDTO [orderId=" + orderid + ", buyerId=" + buyerid + ", amount=" + amount + ", date="
-					+ date + ", address=" + address + ", status=" + status + "]";
+			return "OrderdetailsDTO [ORDERID=" + ORDERID + ", BUYERID=" + BUYERID + ", AMOUNT=" + AMOUNT + ", date="
+					+ DATE + ", ADDRESS=" + ADDRESS + ", STATUS=" + STATUS + "]";
 		}
 
 	
 		// Converts Entity into DTO
 		public static OrderdetailsDTO valueOf(Orderdetails orderdetails) {
 			OrderdetailsDTO orderdetailsDTO = new OrderdetailsDTO();
-			orderdetailsDTO.setOrderId(orderdetails.getOrderId());
-			orderdetailsDTO.setBuyerId(orderdetails.getBuyerId());
-			orderdetailsDTO.setAmount(orderdetails.getAmount());
-			orderdetailsDTO.setDate(orderdetails.getDate());
-			orderdetailsDTO.setAddress(orderdetails.getAddress());
-			orderdetailsDTO.setStatus(orderdetails.getStatus());
+			orderdetailsDTO.setORDERID(orderdetails.getORDERID());
+			orderdetailsDTO.setBUYERID(orderdetails.getBuyerId());
+			orderdetailsDTO.setAMOUNT(orderdetails.getAMOUNT());
+			orderdetailsDTO.setDate(orderdetails.getDATE());
+			orderdetailsDTO.setADDRESS(orderdetails.getADDRESS());
+			orderdetailsDTO.setSTATUS(orderdetails.getSTATUS());
 			return orderdetailsDTO;
-			
 		}
+		
+		//Converts DTO into Entity
+		public Orderdetails createEntity() {
+			Orderdetails orderdetails = new Orderdetails();
+			orderdetails.setORDERID(this.getBUYERID());
+			orderdetails.setBuyerId(this.getBUYERID());
+			orderdetails.setAMOUNT(this.getAMOUNT());
+			orderdetails.setADDRESS(this.getADDRESS());
+			orderdetails.setDATE(this.getDate());
+			orderdetails.setSTATUS(this.getSTATUS());
+			return orderdetails;
+		}		
 	
 }
 
