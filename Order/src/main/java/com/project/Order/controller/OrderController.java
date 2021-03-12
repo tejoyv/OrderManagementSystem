@@ -28,6 +28,14 @@ public class OrderController {
 		return orderService.getAllOrders();
 	}
 	
+	//Fetch a particular order
+	@GetMapping(value="/api/orders/{orderid}")
+	public OrderdetailsDTO getParticularOrder(@PathVariable Integer orderid) throws OrderMSException
+	{
+		logger.info("Fetching a particular order for id {}",orderid);
+		OrderdetailsDTO order = orderService.getParticularOrder(orderid);
+		return order;
+	}
 	
 
 }

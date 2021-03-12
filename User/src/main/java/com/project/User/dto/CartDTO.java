@@ -4,56 +4,66 @@ import com.project.User.entity.Cart;
 
 public class CartDTO {
 
-	int buyerId;
-	int prodId;
-	int quantity;
+	int BUYERID;
+	int PRODID;
+	int QUANTITY;
 	
 	public CartDTO() {
 		super();
 	}
 
-	public CartDTO(int buyerId, int prodId, int quantity) {
+	public CartDTO(int BUYERID, int PRODID, int QUANTITY) {
 		super();
-		this.buyerId = buyerId;
-		this.prodId = prodId;
-		this.quantity = quantity;
+		this.BUYERID = BUYERID;
+		this.PRODID = PRODID;
+		this.QUANTITY = QUANTITY;
 	}
 
-	public int getBuyerId() {
-		return buyerId;
+	public int getBUYERID() {
+		return BUYERID;
 	}
 
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setBUYERID(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
 
-	public int getProdId() {
-		return prodId;
+	public int getPRODID() {
+		return PRODID;
 	}
 
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getQUANTITY() {
+		return QUANTITY;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQUANTITY(int QUANTITY) {
+		this.QUANTITY = QUANTITY;
 	}
 	
+	//convert entity to dto
 	public static CartDTO valueOf(Cart cart) {
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setBuyerId(cart.getBUYERID());
-		cartDTO.setProdId(cart.getPRODID());
-		cartDTO.setQuantity(cart.getQuantity());
+		cartDTO.setBUYERID(cart.getBUYERID());
+		cartDTO.setPRODID(cart.getPRODID());
+		cartDTO.setQUANTITY(cart.getQUANTITY());
 		return cartDTO;
+	}
+	
+	//convert dto to entity
+	public Cart createEntity() {
+		Cart cart = new Cart();
+		cart.setBUYERID(this.getBUYERID());
+		cart.setPRODID(this.getPRODID());
+		cart.setQUANTITY(this.getQUANTITY());
+		return cart;
 	}
 
 	@Override
 	public String toString() {
-		return "CartDTO [buyerId=" + buyerId + ", prodId=" + prodId + ", quantity=" + quantity + "]";
+		return "CartDTO [BUYERID=" + BUYERID + ", PRODID=" + PRODID + ", QUANTITY=" + QUANTITY + "]";
 	}
 	
 	

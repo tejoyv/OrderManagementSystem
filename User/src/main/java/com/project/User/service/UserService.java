@@ -12,11 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
+import com.project.User.dto.CartDTO;
 import com.project.User.dto.SellerDTO;
+import com.project.User.dto.WishlistDTO;
 import com.project.User.entity.Buyer;
+import com.project.User.entity.BuyerProductId;
+import com.project.User.entity.Cart;
 import com.project.User.entity.Seller;
+import com.project.User.entity.Wishlist;
 import com.project.User.repository.BuyerRepository;
+import com.project.User.repository.CartRepository;
 import com.project.User.repository.SellerRepository;
+import com.project.User.repository.WishlistRepository;
 
 @Service
 public class UserService {
@@ -27,6 +34,12 @@ public class UserService {
 	
 	@Autowired
 	SellerRepository sellerRepository;
+	
+	@Autowired
+	WishlistRepository wishlistRespository;
+	
+	@Autowired
+	CartRepository cartRepository;
 	
 	@Autowired
 	Environment environment;
@@ -140,6 +153,54 @@ public class UserService {
 			return false;
 		}
 	}
-
+	
+	// add product to wishlist (buyer)
+	public boolean addBuyerWishlist(WishlistDTO wishlistDTO) {
+		Optional<Wishlist> wishlist = wishlistRespository.findById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()));
+		if(!wishlist.isPresent()) {
+			Wishlist wishlist1 = wishlistDTO.createEntity();
+			wishlistRespository.save(wishlist1);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	// add product to cart (Buyer)
+	public boolean addToCart(CartDTO cartDTO) {
+		Optional<Cart> cart = cartRepository.findById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()));
+		if(!cart.isPresent()) {
+			Cart cart1 = cartDTO.createEntity();
+			cartRepository.save(cart1);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
+	// remove product from wishlist
+	public boolean removeProductFromWishlist(WishlistDTO wishlistDTO) {
+		Optional<Wishlist> wishlist = wishlistRespository.findById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()));
+		if(wishlist.isPresent()) {
+			wishlistRespository.deleteById(new BuyerProductId(wishlistDTO.getBUYERID(),wishlistDTO.getPRODID()) );
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	//remove product from cart
+	public boolean removeProductFromCart(CartDTO cartDTO) {
+		Optional<Cart> cart = cartRepository.findById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()));
+		if(cart.isPresent()) {
+			cartRepository.deleteById(new BuyerProductId(cartDTO.getBUYERID(),cartDTO.getPRODID()) );
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 }
