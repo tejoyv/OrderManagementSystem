@@ -24,19 +24,19 @@ public class Buyer {
 	@Column(nullable = false)
 	String PHONENUMBER;
 	@Column
-	String ISPRIVILEGED;
+	int ISPRIVILEGED;
 	@Column
-	String REWARDPOINTS;
+	int REWARDPOINTS;
 	@Column
-	String ISACTIVE;
+	int ISACTIVE;
 	
 	//parameterless constructor
 	public Buyer() {
 		super();
 	}
     //parametrized constructor
-	public Buyer(int BUYERID, String NAME, String PASSWORD, String EMAIL, String phoneNumber, String ISPRIVILEGED,
-			String REWARDPOINTS, String isActive) {
+	public Buyer(int BUYERID, String NAME, String PASSWORD, String EMAIL, String phoneNumber,int ISPRIVILEGED,
+			int REWARDPOINTS, int isActive) {
 		super();
 		this.BUYERID = BUYERID;
 		this.NAME = NAME;
@@ -88,27 +88,27 @@ public class Buyer {
 		this.PHONENUMBER = phoneNumber;
 	}
 
-	public String getIsPrivileged() {
+	public int getIsPrivileged() {
 		return ISPRIVILEGED;
 	}
 
-	public void setIsPrivileged(String ISPRIVILEGED) {
+	public void setIsPrivileged(int ISPRIVILEGED) {
 		this.ISPRIVILEGED = ISPRIVILEGED;
 	}
 
-	public String getRewardPoints() {
+	public int getRewardPoints() {
 		return REWARDPOINTS;
 	}
 
-	public void setRewardPoints(String REWARDPOINTS) {
+	public void setRewardPoints(int REWARDPOINTS) {
 		this.REWARDPOINTS = REWARDPOINTS;
 	}
 
-	public String getIsActive() {
+	public int getIsActive() {
 		return ISACTIVE;
 	}
 
-	public void setIsActive(String isActive) {
+	public void setIsActive(int isActive) {
 		this.ISACTIVE = isActive;
 	}
 
