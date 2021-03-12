@@ -23,13 +23,13 @@ public class Seller {
 	@Column(nullable = false)
     String PASSWORD;
 	@Column
-    String ISACTIVE;
+    int ISACTIVE;
 	
 	public Seller() {
 		super();
 	}
 
-	public Seller(int SELLERID, String NAME, String EMAIL, String PHONENUMBER, String PASSWORD, String ISACTIVE) {
+	public Seller(int SELLERID, String NAME, String EMAIL, String PHONENUMBER, String PASSWORD, int ISACTIVE) {
 		super();
 		this.SELLERID = SELLERID;
 		this.NAME = NAME;
@@ -79,11 +79,11 @@ public class Seller {
 		this.PASSWORD = PASSWORD;
 	}
 
-	public String getIsActive() {
+	public int getIsActive() {
 		return ISACTIVE;
 	}
 
-	public void setISACTIVE(String ISACTIVE) {
+	public void setISACTIVE(int ISACTIVE) {
 		this.ISACTIVE = ISACTIVE;
 	}
 	
