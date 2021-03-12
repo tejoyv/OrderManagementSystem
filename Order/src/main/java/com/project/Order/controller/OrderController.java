@@ -1,5 +1,6 @@
 package com.project.Order.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,6 +72,8 @@ public class OrderController {
 		neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
 		neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
 		neworderdetailsDTO.setAMOUNT(amount);
+		neworderdetailsDTO.setDate(LocalDate.now());
+		neworderdetailsDTO.setSTATUS("ORDER PLACED");
 		Orderdetails orderdetails = neworderdetailsDTO.createEntity();
 		orderRepository.save(orderdetails);
 		
