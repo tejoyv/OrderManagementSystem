@@ -27,7 +27,6 @@ public class ProductController {
 	@GetMapping(value = "/api/products",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
 		logger.info("Fetching all products");
-		System.out.println("In controller");
 		return productService.getAllProducts();
 	}
 	
@@ -43,5 +42,13 @@ public class ProductController {
 	public List<ProductDTO> getProductsByName(@PathVariable String productname) throws ProductMSException{
 		logger.info("Product details for product name {}", productname);
 		return productService.getProductByName(productname);
+	}
+	
+	// Fetches products according to product id
+	@GetMapping(value = "/api/productid/{prodid}")
+	public ProductDTO getProductsById(@PathVariable Integer prodid) throws ProductMSException{
+		logger.info("Product details for product with prodid {}", prodid);
+		ProductDTO productDTO = productService.getProdByProdId(prodid);
+		return productDTO;
 	}
 }
