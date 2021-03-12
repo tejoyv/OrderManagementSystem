@@ -48,7 +48,7 @@ public class UserService {
 		boolean status=false;
 		Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
 		if(buyer!=null) {
-			System.out.println("Print");
+			//System.out.println("Print");
 			//Buyer buyer1 = buyer.get();
 			if (buyer.getPassword().equals(buyerDTO.getPassword())) {
 				status=true;
