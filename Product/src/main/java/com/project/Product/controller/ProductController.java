@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.project.Product.dto.ProductDTO;
+import com.project.Product.dto.SubscribedproductDTO;
 import com.project.Product.service.ProductMSException;
 import com.project.Product.service.ProductService;
+import com.project.Product.service.SubscribedProductService;
 
 @RestController
 public class ProductController {
@@ -28,6 +31,12 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	SubscribedProductService subscribedProductService; 
+	
+	@Autowired
+	Environment environment;
 	
 	// Fetches all products
 	@GetMapping(value = "/api/products",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,6 +62,14 @@ public class ProductController {
 	// Fetches products according to product id
 	@GetMapping(value = "/api/productid/{prodid}")
 	public ProductDTO getProductsById(@PathVariable Integer prodid) throws ProductMSException{
+		logger.info("Product details for product with prodid {}", prodid);
+		ProductDTO productDTO = productService.getProdByProdId(prodid);
+		return productDTO;
+	}
+	
+	// Fetches products according to product id and add to wishlist
+	@GetMapping(value = "/api/productid/{prodid}/wishlist")
+	public ProductDTO addProductToWishlist(@PathVariable Integer prodid) throws ProductMSException{
 		logger.info("Product details for product with prodid {}", prodid);
 		ProductDTO productDTO = productService.getProdByProdId(prodid);
 		return productDTO;
@@ -92,5 +109,33 @@ public class ProductController {
 		return response;
 	}
 	
-	// 
+	// add product to subscription
+	@PostMapping(value = "/api/subscriptions/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> addProductToSubscription(@RequestBody SubscribedproductDTO subscribedProductDTO) throws Exception{
+		logger.info("Add to subscription request for product {} ", subscribedProductDTO);
+		ResponseEntity<String> response = null;
+		try {
+			subscribedProductService.addProduct(subscribedProductDTO);
+			String success_message = "Product added to subscription successfully";
+			response = new ResponseEntity<String>(success_message,HttpStatus.CREATED);
+		}catch(Exception e){
+			response = new ResponseEntity<String>(environment.getProperty(e.getMessage()),HttpStatus.BAD_REQUEST);
+		}
+		return response;			
+	}
+	
+	// Get the Subscribed Product By BuyerId
+	@GetMapping(value="/api/subscriptions/{buyerid}")
+	public ResponseEntity<List<SubscribedproductDTO>> getSubscribedProductByBuyerId(@PathVariable Integer buyerid)
+	{
+		logger.info("Fetching product by Buyer Id {}", buyerid);
+		ResponseEntity<List<SubscribedproductDTO>> response = null;
+		try {
+			List<SubscribedproductDTO> subscribedProducts = subscribedProductService.getSubscribedProducts(buyerid);
+			response = new ResponseEntity<List<SubscribedproductDTO>>(subscribedProducts,HttpStatus.OK);
+		}catch(Exception e){
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,environment.getProperty(e.getMessage()),e);
+		}
+		return response;
+	}
 }
