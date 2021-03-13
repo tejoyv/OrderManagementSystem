@@ -83,8 +83,7 @@ public class ProductService{
 
 
 	public void addProduct(ProductDTO productDTO) throws Exception {
-		// TODO Auto-generated method stub
-		Validator.validateProduct(productDTO);
+		validator.validateProduct(productDTO);
 		Product product = productDTO.createEntity();
 		productRepository.save(product);
 	}

@@ -327,6 +327,23 @@ public class UserController {
 		return response;
 		
 	}
+	
+	//updatePrivilege
+	@PostMapping(value="/api/buyer/updatePrivilege")
+	public ResponseEntity<String> updatePrivilege(@RequestBody BuyerDTO buyerDTO) {
+		ResponseEntity<String> response;
+		try {
+			userService.updatePrivilege(buyerDTO);
+			logger.info("Buyer Privilege updated {}", buyerDTO);
+			String successMessage = "Buyer Privilege updated successfully";
+			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
+		}
+		catch(Exception e)
+		{
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
 
 }
 
