@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class OrderCompositeId implements Serializable {
 	
-	private int orderid;
-	private int prodid;
+	private int ORDERID;
+	private int PRODID;
 
 	//parameterless constructor
 	public OrderCompositeId() {
@@ -14,10 +14,10 @@ public class OrderCompositeId implements Serializable {
 	
 	
 	//parameterised constructor
-	public OrderCompositeId(int orderid, int prodid) {
+	public OrderCompositeId(int ORDERID, int PRODID) {
 		super();
-		this.orderid = orderid;
-		this.prodid = prodid;
+		this.ORDERID = ORDERID;
+		this.PRODID = PRODID;
 	}
 
 
@@ -26,8 +26,8 @@ public class OrderCompositeId implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + orderid;
-		result = prime * result + prodid;
+		result = prime * result + ORDERID;
+		result = prime * result + PRODID;
 		return result;
 	}
 
@@ -40,9 +40,9 @@ public class OrderCompositeId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderCompositeId other = (OrderCompositeId) obj;
-		if (orderid != other.orderid)
+		if (ORDERID != other.ORDERID)
 			return false;
-		if (prodid != other.prodid)
+		if (PRODID != other.PRODID)
 			return false;
 		return true;
 	}

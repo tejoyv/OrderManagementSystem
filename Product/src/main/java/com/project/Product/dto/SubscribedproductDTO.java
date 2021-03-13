@@ -3,71 +3,71 @@ package com.project.Product.dto;
 import com.project.Product.entity.Subscribedproduct;
 
 public class SubscribedproductDTO {
-	int subid;
-	int buyerid;
-	int prodid;
-	int quantity;
+	int SUBID;
+	int BUYERID;
+	int PRODID;
+	int QUANTITY;
 	
 	//constructors
 	public SubscribedproductDTO() {
 		super();
 	}
 	
-	public SubscribedproductDTO(int subid, int buyerid, int prodid, int quantity) {
+	public SubscribedproductDTO(int SUBID, int BUYERID, int PRODID, int QUANTITY) {
 		super();
-		this.subid = subid;
-		this.buyerid = buyerid;
-		this.prodid = prodid;
-		this.quantity = quantity;
+		this.SUBID = SUBID;
+		this.BUYERID = BUYERID;
+		this.PRODID = PRODID;
+		this.QUANTITY = QUANTITY;
 	}
 
 	//getters and setters
-	public int getSubid() {
-		return subid;
+	public int getSUBID() {
+		return SUBID;
 	}
 
-	public void setSubid(int subid) {
-		this.subid = subid;
+	public void setSUBID(int SUBID) {
+		this.SUBID = SUBID;
 	}
 
-	public int getBuyerid() {
-		return buyerid;
+	public int getBUYERID() {
+		return BUYERID;
 	}
 
-	public void setBuyerid(int buyerid) {
-		this.buyerid = buyerid;
+	public void setBUYERID(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
 
-	public int getProdid() {
-		return prodid;
+	public int getPRODID() {
+		return PRODID;
 	}
 
-	public void setProdid(int prodid) {
-		this.prodid = prodid;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getQUANTITY() {
+		return QUANTITY;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQUANTITY(int QUANTITY) {
+		this.QUANTITY = QUANTITY;
 	}
 	
 	// Converts Entity into DTO
 		public static SubscribedproductDTO valueOf(Subscribedproduct subscribedproduct) {
 			SubscribedproductDTO subscribedproductDTO = new SubscribedproductDTO();
-			subscribedproductDTO.setBuyerid(subscribedproduct.getBuyerid());
-			subscribedproductDTO.setProdid(subscribedproduct.getProdid());
-			subscribedproductDTO.setQuantity(subscribedproduct.getQuantity());
-			subscribedproductDTO.setSubid(subscribedproduct.getSubid());
+			subscribedproductDTO.setBUYERID(subscribedproduct.getBUYERID());
+			subscribedproductDTO.setPRODID(subscribedproduct.getPRODID());
+			subscribedproductDTO.setQUANTITY(subscribedproduct.getQUANTITY());
+			subscribedproductDTO.setSUBID(subscribedproduct.getSUBID());
 			return subscribedproductDTO;
 		}
 
 		@Override
 		public String toString() {
-			return "SubscribedproductDTO [subid=" + subid + ", buyerid=" + buyerid + ", prodid=" + prodid
-					+ ", quantity=" + quantity + "]";
+			return "SubscribedproductDTO [SUBID=" + SUBID + ", BUYERID=" + BUYERID + ", PRODID=" + PRODID
+					+ ", QUANTITY=" + QUANTITY + "]";
 		}
 	
 		

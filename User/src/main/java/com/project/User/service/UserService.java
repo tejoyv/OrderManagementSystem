@@ -291,6 +291,7 @@ public class UserService {
 				return false;
 			}
 		}
+
 	  //updatePrivilege
 		public boolean updatePrivilege(BuyerDTO buyerDTO) throws Exception {
 			
@@ -311,4 +312,11 @@ public class UserService {
 			return true;
 		}
 		
+
+		public WishlistDTO getWishlist(Integer buyerid) {
+			Wishlist wishlist = wishlistRespository.findByBUYERID(buyerid);
+			WishlistDTO wishlistDTO = WishlistDTO.valueOf(wishlist);
+			return wishlistDTO;
+		}
+
 }

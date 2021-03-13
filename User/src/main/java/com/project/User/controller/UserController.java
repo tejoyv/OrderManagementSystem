@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.project.User.Validator.Validator;
@@ -24,6 +25,7 @@ import com.project.User.dto.CartDTO;
 import com.project.User.dto.SellerDTO;
 import com.project.User.dto.WishlistDTO;
 import com.project.User.entity.Cart;
+import com.project.User.entity.Wishlist;
 import com.project.User.service.UserService;
 
 @RestController
@@ -171,7 +173,7 @@ public class UserController {
 	@PostMapping(value = "/api/wishlist/add")
 	public ResponseEntity<String> addToWishlist(@RequestBody WishlistDTO wishlistDTO)
 	{
-		logger.info("Product wishlisted successfully for buyer {}", wishlistDTO);
+		logger.info("Wishlist request buyer {}", wishlistDTO);
 		ResponseEntity<String> response;
 		String successMessage = "Product wishlisted successfully !!!!!!!";
 		String errorMessage = "Duplicate product found !!!!!!!";
@@ -184,22 +186,38 @@ public class UserController {
 		return response;
 	}
 	
+	//Get wishlist of a particular buyer
+	@GetMapping(value="/api/getwishlist/{buyerid}")
+	public WishlistDTO getWishlist(@PathVariable Integer buyerid){
+		WishlistDTO wishlistDTO = userService.getWishlist(buyerid);
+		return wishlistDTO;
+	}
+	
 	//adding product to cart (Buyer)
 	@PostMapping(value = "/api/cart/add")
 	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO){
 		logger.info("Product added to cart successfully for buyer {}",cartDTO);
+		int buyerid = cartDTO.getBUYERID();
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:8300/api/getwishlist/{buyerid}";
+		WishlistDTO wishlistDTO = restTemplate.getForObject(url,WishlistDTO.class,buyerid);
+		int newbuyerid = wishlistDTO.getBUYERID();
+		int prodid = wishlistDTO.getPRODID();
+		cartDTO.setBUYERID(newbuyerid);
+		cartDTO.setPRODID(prodid);
+		
 		ResponseEntity<String>response;
 		String successMessage = "Product added to cart successfully !!!!!!!";
 		String errorMessage = "Duplicate entry found !!!!!!!";
 		if(userService.addToCart(cartDTO)) {
-			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
 		}else {
 			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}
 	
-	//Get cart
+	//Get cart of a particular buyer
 	@GetMapping(value="/api/getcart/{buyerid}")
 	public CartDTO getCart(@PathVariable Integer buyerid){
 		CartDTO cartDTO = userService.getCart(buyerid);
@@ -222,7 +240,7 @@ public class UserController {
 		return response;
 	}
 	
-	//removing product from wishlist (Buyer)
+	//removing product from cart (Buyer)
 	@DeleteMapping(value="/api/cart/remove")
 	public ResponseEntity<String> removeFromCart(@RequestBody CartDTO cartDTO){
 		logger.info("Product removed from Cart  {}", cartDTO);
