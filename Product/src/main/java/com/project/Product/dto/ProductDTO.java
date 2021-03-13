@@ -105,21 +105,39 @@ public class ProductDTO {
 	}
 	
 	// Converts Entity into DTO
-		public static ProductDTO valueOf(Product product) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setBRAND(product.getBRAND());
-			productDTO.setCATEGORY(product.getCATEGORY());
-			productDTO.setDESCRIPTION(product.getDESCRIPTION());
-			productDTO.setIMAGE(product.getIMAGE());
-			productDTO.setPRICE(product.getPRICE());
-			productDTO.setPRODID(product.getPRODID());
-			productDTO.setPRODUCTNAME(product.getPRODUCTNAME());
-			productDTO.setRATING(product.getRATING());
-			productDTO.setSELLERID(product.getSELLERID());
-			productDTO.setSTOCK(product.getSTOCK());
-			productDTO.setSUBCATEGORY(product.getSUBCATEGORY());
-			return productDTO;
-		}
+	public static ProductDTO valueOf(Product product) {
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setBRAND(product.getBRAND());
+		productDTO.setCATEGORY(product.getCATEGORY());
+		productDTO.setDESCRIPTION(product.getDESCRIPTION());
+		productDTO.setIMAGE(product.getIMAGE());
+		productDTO.setPRICE(product.getPRICE());
+		productDTO.setPRODID(product.getPRODID());
+		productDTO.setPRODUCTNAME(product.getPRODUCTNAME());
+		productDTO.setRATING(product.getRATING());
+		productDTO.setSELLERID(product.getSELLERID());
+		productDTO.setSTOCK(product.getSTOCK());
+		productDTO.setSUBCATEGORY(product.getSUBCATEGORY());
+		return productDTO;
+	}
+		
+	//convert dto into entity
+	public Product createEntity()
+	{
+		Product product = new Product();
+		product.setBRAND(this.getBRAND());
+		product.setCATEGORY(this.getCATEGORY());
+		product.setDESCRIPTION(this.getDESCRIPTION());
+		product.setIMAGE(this.getIMAGE());
+		product.setPRICE(this.getPRICE());
+		product.setPRODID(this.getPRODID());
+		product.setPRODUCTNAME(this.getPRODUCTNAME());
+		product.setRATING(this.getRATING());
+		product.setSELLERID(this.getSELLERID());
+		product.setSTOCK(this.getSTOCK());
+		product.setSUBCATEGORY(this.getSUBCATEGORY());
+		return product;
+	}
 
 	@Override
 	public String toString() {

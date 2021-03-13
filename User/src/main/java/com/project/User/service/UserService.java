@@ -291,4 +291,9 @@ public class UserService {
 				return false;
 			}
 		}
+		public WishlistDTO getWishlist(Integer buyerid) {
+			Wishlist wishlist = wishlistRespository.findByBUYERID(buyerid);
+			WishlistDTO wishlistDTO = WishlistDTO.valueOf(wishlist);
+			return wishlistDTO;
+		}
 }
