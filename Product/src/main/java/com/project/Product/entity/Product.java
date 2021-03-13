@@ -12,27 +12,27 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int prodid;
+	int PRODID;
 	@Column(nullable = false)
-	String brand;
+	String BRAND;
 	@Column(nullable = false)
-	String category;
+	String CATEGORY;
 	@Column(nullable = false)
-	String description;
+	String DESCRIPTION;
 	@Column(nullable = false)
-	String image;
+	String IMAGE;
 	@Column(nullable = false)
-	double price;
+	double PRICE;
 	@Column(nullable = false)
-	String productname;
+	String PRODUCTNAME;
 	@Column
-	String rating;
+	String RATING;
 	@Column(nullable = false)
-	int sellerid;
+	int SELLERID;
 	@Column(nullable = false)
-	int stock;
+	int STOCK;
 	@Column(nullable = false)
-	String subcategory;
+	String SUBCATEGORY;
 	
 	//parameterless constructor
 	public Product() {
@@ -40,88 +40,88 @@ public class Product {
 	}
 		
 		//parameterized constructor
-	public Product(int prodid, String brand, String category, String description, String image, double price,
-				String productname, String rating, int sellerid, int stock, String subcategory) {
+	public Product(int PRODID, String BRAND, String CATEGORY, String DESCRIPTION, String IMAGE, double PRICE,
+				String PRODUCTNAME, String RATING, int SELLERID, int STOCK, String SUBCATEGORY) {
 		super();
-		this.prodid = prodid;
-		this.brand = brand;
-		this.category = category;
-		this.description = description;
-		this.image = image;
-		this.price = price;
-		this.productname = productname;
-		this.rating = rating;
-		this.sellerid = sellerid;
-		this.stock = stock;
-		this.subcategory = subcategory;
+		this.PRODID = PRODID;
+		this.BRAND = BRAND;
+		this.CATEGORY = CATEGORY;
+		this.DESCRIPTION = DESCRIPTION;
+		this.IMAGE = IMAGE;
+		this.PRICE = PRICE;
+		this.PRODUCTNAME = PRODUCTNAME;
+		this.RATING = RATING;
+		this.SELLERID = SELLERID;
+		this.STOCK = STOCK;
+		this.SUBCATEGORY = SUBCATEGORY;
 	}	
 	
 	//getters and setters 
-	public int getProdid() {
-		return prodid;
+	public int getPRODID() {
+		return PRODID;
 	}
-	public void setProdid(int prodid) {
-		this.prodid = prodid;
+	public void setPRODID(int PRODID) {
+		this.PRODID = PRODID;
 	}
-	public String getBrand() {
-		return brand;
+	public String getBRAND() {
+		return BRAND;
 	}
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setBRAND(String BRAND) {
+		this.BRAND = BRAND;
 	}
-	public String getCategory() {
-		return category;
+	public String getCATEGORY() {
+		return CATEGORY;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCATEGORY(String CATEGORY) {
+		this.CATEGORY = CATEGORY;
 	}
-	public String getDescription() {
-		return description;
+	public String getDESCRIPTION() {
+		return DESCRIPTION;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDESCRIPTION(String DESCRIPTION) {
+		this.DESCRIPTION = DESCRIPTION;
 	}
-	public String getImage() {
-		return image;
+	public String getIMAGE() {
+		return IMAGE;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setIMAGE(String IMAGE) {
+		this.IMAGE = IMAGE;
 	}
-	public double getPrice() {
-		return price;
+	public double getPRICE() {
+		return PRICE;
 	}
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPRICE(double PRICE) {
+		this.PRICE = PRICE;
 	}
-	public String getProductname() {
-		return productname;
+	public String getPRODUCTNAME() {
+		return PRODUCTNAME;
 	}
-	public void setProductname(String productname) {
-		this.productname = productname;
+	public void setPRODUCTNAME(String PRODUCTNAME) {
+		this.PRODUCTNAME = PRODUCTNAME;
 	}
-	public String getRating() {
-		return rating;
+	public String getRATING() {
+		return RATING;
 	}
-	public void setRating(String rating) {
-		this.rating = rating;
+	public void setRATING(String RATING) {
+		this.RATING = RATING;
 	}
-	public int getSellerid() {
-		return sellerid;
+	public int getSELLERID() {
+		return SELLERID;
 	}
-	public void setSellerid(int sellerid) {
-		this.sellerid = sellerid;
+	public void setSELLERID(int SELLERID) {
+		this.SELLERID = SELLERID;
 	}
-	public int getStock() {
-		return stock;
+	public int getSTOCK() {
+		return STOCK;
 	}
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setSTOCK(int STOCK) {
+		this.STOCK = STOCK;
 	}
-	public String getSubcategory() {
-		return subcategory;
+	public String getSUBCATEGORY() {
+		return SUBCATEGORY;
 	}
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
+	public void setSUBCATEGORY(String SUBCATEGORY) {
+		this.SUBCATEGORY = SUBCATEGORY;
 	}
 }
 

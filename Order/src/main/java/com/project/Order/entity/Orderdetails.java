@@ -13,27 +13,27 @@ import javax.persistence.Table;
 @Table(name = "orderdetails")
 public class Orderdetails {
 	@Id
-	int orderid;
+	int ORDERID;
 	@Column(nullable = false)
-	int buyerid;
+	int BUYERID;
 	@Column(nullable = false)
-	double amount;
+	double AMOUNT;
 	@Column(nullable = false)
-	Date date;
+	Date DATE;
 	@Column(nullable = false)
-	String address;
+	String ADDRESS;
 	@Column(nullable = false)
-	String status;
+	String STATUS;
 
 	//parameterised constructor
-	public Orderdetails(int orderid, int buyerId, double amount, Date date, String address, String status) {
+	public Orderdetails(int ORDERID, int buyerId, double AMOUNT, Date DATE, String ADDRESS, String STATUS) {
 		super();
-		this.orderid = orderid;
-		this.buyerid = buyerid;
-		this.amount = amount;
-		this.date = date;
-		this.address = address;
-		this.status = status;
+		this.ORDERID = ORDERID;
+		this.BUYERID = BUYERID;
+		this.AMOUNT = AMOUNT;
+		this.DATE = DATE;
+		this.ADDRESS = ADDRESS;
+		this.STATUS = STATUS;
 	}
 
 	//parameterless constructor
@@ -42,42 +42,42 @@ public class Orderdetails {
 	}
 
 	//getters and setters
-	public int getOrderId() {
-		return orderid;
+	public int getORDERID() {
+		return ORDERID;
 	}
-	public void setOrderId(int orderid) {
-		this.orderid = orderid;
+	public void setORDERID(int ORDERID) {
+		this.ORDERID = ORDERID;
 	}
 	public int getBuyerId() {
-		return buyerid;
+		return BUYERID;
 	}
-	public void setBuyerId(int buyerid) {
-		this.buyerid = buyerid;
+	public void setBuyerId(int BUYERID) {
+		this.BUYERID = BUYERID;
 	}
-	public double getAmount() {
-		return amount;
+	public double getAMOUNT() {
+		return AMOUNT;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setAMOUNT(double AMOUNT) {
+		this.AMOUNT = AMOUNT;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDATE() {
+		return DATE;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDATE(Date DATE) {
+		this.DATE = DATE;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getADDRESS() {
+		return ADDRESS;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setADDRESS(String ADDRESS) {
+		this.ADDRESS = ADDRESS;
 	}
-	public String getStatus() {
-		return status;
+	public String getSTATUS() {
+		return STATUS;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSTATUS(String STATUS) {
+		this.STATUS = STATUS;
 	}
 	
 }
