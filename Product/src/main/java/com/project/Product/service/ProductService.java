@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.project.Product.Validator.Validator;
 import com.project.Product.dto.ProductDTO;
 import com.project.Product.entity.Product;
 import com.project.Product.repository.ProductRepository;
@@ -69,6 +70,26 @@ public class ProductService {
 			productDTO = ProductDTO.valueOf(product);
 		}
 		return productDTO;
+	}
+
+
+	public void addProduct(ProductDTO productDTO) throws Exception {
+		// TODO Auto-generated method stub
+		Validator.validateProduct(productDTO);
+		Product product = productDTO.createEntity();
+		productRepository.save(product);
+	}
+	
+	public boolean removeProduct(Integer productid)
+	{
+		Optional<Product> product = productRepository.findById(productid);
+		if(product.isPresent()) {
+			Product product1 = product.get();
+			productRepository.delete(product1);
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

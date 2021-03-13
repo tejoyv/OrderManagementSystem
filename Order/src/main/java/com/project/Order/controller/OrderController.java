@@ -46,15 +46,12 @@ public class OrderController {
 	@PostMapping(value="/api/placeOrder")
 	public ProductDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
 		int buyerid = orderdetailsDTO.getBUYERID();
-		System.out.println(buyerid);
 		String carturl = "http://localhost:8300/api/getcart/{buyerid}";
 		String producturl = "http://localhost:8100/api/productid/{prodid}";
 		RestTemplate restTemplate = new RestTemplate();
 		CartDTO cartDTO = restTemplate.getForObject(carturl, CartDTO.class, buyerid);
 		int prodid = cartDTO.getPRODID();
-		System.out.println("Before RT:"+prodid);
 		ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
-		System.out.println(productDTO.getPRICE());
 		int price = (int) productDTO.getPRICE();
 		int quantity = cartDTO.getQUANTITY();
 		int amount = price*quantity;
