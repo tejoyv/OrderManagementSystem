@@ -68,13 +68,6 @@ public class ProductController {
 		return productDTO;
 	}
 	
-	// Fetches products according to product id and add to wishlist
-	@GetMapping(value = "/api/productid/{prodid}/wishlist")
-	public ProductDTO addProductToWishlist(@PathVariable Integer prodid) throws ProductMSException{
-		logger.info("Product details for product with prodid {}", prodid);
-		ProductDTO productDTO = productService.getProdByProdId(prodid);
-		return productDTO;
-	}
 	
 	// add a product
 	@PostMapping(value = "/api/product/add")
@@ -89,7 +82,7 @@ public class ProductController {
 			productService.addProduct(productDTO);
 			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
 		}catch(Exception e) {
-			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}
@@ -152,7 +145,7 @@ public class ProductController {
 			productService.updateStock(productDTO);
 			response = new ResponseEntity<String>(successMessage,HttpStatus.CREATED);
 		}catch(Exception e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,environment.getProperty(e.getMessage()),e);
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}

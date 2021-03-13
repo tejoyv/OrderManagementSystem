@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -30,6 +31,10 @@ public class ProductService{
 	
 	@Autowired
 	Validator validator;
+	
+	@Autowired
+	Environment environment;
+	
 	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
@@ -84,8 +89,14 @@ public class ProductService{
 
 	public void addProduct(ProductDTO productDTO) throws Exception {
 		validator.validateProduct(productDTO);
-		Product product = productDTO.createEntity();
-		productRepository.save(product);
+		List<Product> product = productRepository.findByPRODUCTNAME(productDTO.getPRODUCTNAME());
+		if(product.isEmpty()) {
+			Product product1 = productDTO.createEntity();
+			productRepository.save(product1);
+		}
+		else {
+			throw new Exception(environment.getProperty("PRODUCT_ALREADY_EXISTS"));
+		}
 	}
 	
 	public boolean removeProduct(Integer productid)

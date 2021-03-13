@@ -43,14 +43,14 @@ public class Validator {
 	}
 
 	private static boolean validateStock(int stock) {
-	  if(stock<=10)
+	  if(stock>=10)
 		return true;
 	  else
 		return false;
 	}
 
 	private static boolean validatePrice(double price) {
-		if(price<=200)
+		if(price>=200)
 			return true;
 		  else
 			return false;
