@@ -37,9 +37,6 @@ public class UserController {
 	@Autowired
 	Environment environment;
 	
-//	@Value("${wishlist.uri}")
-//	String wishlistUri;
-	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// Register a new buyer
@@ -176,7 +173,7 @@ public class UserController {
 	@PostMapping(value = "/api/wishlist/add")
 	public ResponseEntity<String> addToWishlist(@RequestBody WishlistDTO wishlistDTO)
 	{
-		logger.info("Product wishlisted successfully for buyer {}", wishlistDTO);
+		logger.info("Wishlist request buyer {}", wishlistDTO);
 		ResponseEntity<String> response;
 		String successMessage = "Product wishlisted successfully !!!!!!!";
 		String errorMessage = "Duplicate product found !!!!!!!";
@@ -243,7 +240,7 @@ public class UserController {
 		return response;
 	}
 	
-	//removing product from wishlist (Buyer)
+	//removing product from cart (Buyer)
 	@DeleteMapping(value="/api/cart/remove")
 	public ResponseEntity<String> removeFromCart(@RequestBody CartDTO cartDTO){
 		logger.info("Product removed from Cart  {}", cartDTO);
@@ -332,21 +329,21 @@ public class UserController {
 	}
 	
 	//updatePrivilege
-		@PostMapping(value="/api/buyer/updatePrivilege")
-		public ResponseEntity<String> updatePrivilege(@RequestBody BuyerDTO buyerDTO) {
-			ResponseEntity<String> response;
-			try {
-				userService.updatePrivilege(buyerDTO);
-				logger.info("Buyer Privilege updated {}", buyerDTO);
-				String successMessage = "Buyer Privilege updated successfully";
-				response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
-			}
-			catch(Exception e)
-			{
-				response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			}
-			return response;
+	@PostMapping(value="/api/buyer/updatePrivilege")
+	public ResponseEntity<String> updatePrivilege(@RequestBody BuyerDTO buyerDTO) {
+		ResponseEntity<String> response;
+		try {
+			userService.updatePrivilege(buyerDTO);
+			logger.info("Buyer Privilege updated {}", buyerDTO);
+			String successMessage = "Buyer Privilege updated successfully";
+			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
 		}
+		catch(Exception e)
+		{
+			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
 
 }
 

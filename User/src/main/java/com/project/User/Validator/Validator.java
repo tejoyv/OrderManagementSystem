@@ -1,6 +1,7 @@
 package com.project.User.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -87,4 +88,5 @@ public class Validator {
 		 else
 			 return false;
 	}
+
 }

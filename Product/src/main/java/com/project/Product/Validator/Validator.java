@@ -27,7 +27,7 @@ public class Validator {
 			throw new Exception(environment.getProperty("INVALID_STOCK"));
 		}
 		if(!validateImage(product.getIMAGE())) {
-			throw new Exception(environment.getProperty("INVALID_IMAGEFORMAT"));
+			throw new Exception(environment.getProperty("INVALID_IMAGE"));
 		}
    }
 
@@ -55,12 +55,14 @@ public class Validator {
 			return false;
 	}
 
+
 	private static boolean validateDescription(String description) {
 	    if(description.length()<=500)
 		    return true;
 	    else
 	    	return false;
 	}
+
 
 	private static boolean validateName(String productname) {
 		String regex="([A-Za-z]+\\s?)+[^@#$%^&*_!0-9. ]";
@@ -70,5 +72,7 @@ public class Validator {
 		 else
 			   return false;
 	}
+
 	
 }
+
