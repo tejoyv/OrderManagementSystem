@@ -49,7 +49,7 @@ public class ProductController {
 		logger.info("Product details for product name {}", productname);
 		return productService.getProductByName(productname);
 	}
-	
+
 	// Fetches products according to product id
 	@GetMapping(value = "/api/productid/{prodid}")
 	public ProductDTO getProductsById(@PathVariable Integer prodid) throws ProductMSException{

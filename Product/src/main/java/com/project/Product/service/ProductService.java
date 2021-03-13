@@ -16,7 +16,7 @@ import com.project.Product.entity.Product;
 import com.project.Product.repository.ProductRepository;
 
 @Service
-public class ProductService {
+public class ProductService{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -24,6 +24,7 @@ public class ProductService {
 	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
+		System.out.println("In service");
 		List<Product>products = productRepository.findAll();
 		List<ProductDTO> productDTOs = new ArrayList<>();
 		
@@ -35,7 +36,6 @@ public class ProductService {
 		return productDTOs;
 	}
 
-	
 	public List<ProductDTO> getProductByCategory(@PathVariable String category) throws ProductMSException {
 		// TODO Auto-generated method stub
 		List<Product> product = productRepository.findByCATEGORY(category);
@@ -49,8 +49,8 @@ public class ProductService {
 		return productDTOs;
 	}
 
-	
-	public List<ProductDTO> getProductByName(@PathVariable String productname) throws ProductMSException {
+
+	public List<ProductDTO> getProductByName(String productname) throws ProductMSException {
 		// TODO Auto-generated method stub
 		
 		List<Product> products = productRepository.findByPRODUCTNAME(productname);
@@ -62,8 +62,8 @@ public class ProductService {
 		logger.info("Product details according to product name : {}", productDTOs);
 		return productDTOs;
 	}
-	
-	public ProductDTO getProdByProdId(Integer prodid){
+
+	public ProductDTO getProdByProdId(Integer prodid) {
 		Product product = productRepository.findByPRODID(prodid);
 		ProductDTO productDTO=null;
 		if(product!=null) {
@@ -91,5 +91,7 @@ public class ProductService {
 			return false;
 		}
 	}
+	
+
 	
 }

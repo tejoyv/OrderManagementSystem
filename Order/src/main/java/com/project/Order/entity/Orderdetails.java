@@ -1,6 +1,7 @@
 package com.project.Order.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,20 +14,21 @@ import javax.persistence.Table;
 @Table(name = "orderdetails")
 public class Orderdetails {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int ORDERID;
 	@Column(nullable = false)
 	int BUYERID;
 	@Column(nullable = false)
 	double AMOUNT;
-	@Column(nullable = false)
-	Date DATE;
+	@Column
+	LocalDate DATE;
 	@Column(nullable = false)
 	String ADDRESS;
-	@Column(nullable = false)
+	@Column
 	String STATUS;
 
 	//parameterised constructor
-	public Orderdetails(int ORDERID, int buyerId, double AMOUNT, Date DATE, String ADDRESS, String STATUS) {
+	public Orderdetails(int ORDERID, int BUYERID, double AMOUNT, LocalDate DATE, String ADDRESS, String STATUS) {
 		super();
 		this.ORDERID = ORDERID;
 		this.BUYERID = BUYERID;
@@ -60,11 +62,11 @@ public class Orderdetails {
 	public void setAMOUNT(double AMOUNT) {
 		this.AMOUNT = AMOUNT;
 	}
-	public Date getDATE() {
+	public LocalDate getDATE() {
 		return DATE;
 	}
-	public void setDATE(Date DATE) {
-		this.DATE = DATE;
+	public void setDATE(LocalDate localDate) {
+		this.DATE = localDate;
 	}
 
 	public String getADDRESS() {

@@ -3,6 +3,7 @@ package com.project.Order.dto;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import com.project.Order.entity.*;
 
@@ -10,17 +11,17 @@ public class OrderdetailsDTO {
 	int ORDERID;
 	int BUYERID;
 	double AMOUNT;
-	Date DATE;
+	LocalDate DATE;
 	String ADDRESS;
 	String STATUS;
 
 	//parameterised constructor
-	public OrderdetailsDTO(int ORDERID, int BUYERID, double AMOUNT, Date date, String ADDRESS, String STATUS) {
+	public OrderdetailsDTO(int ORDERID, int BUYERID, double AMOUNT, LocalDate DATE, String ADDRESS, String STATUS) {
 		super();
 		this.ORDERID = ORDERID;
 		this.BUYERID = BUYERID;
 		this.AMOUNT = AMOUNT;
-		this.DATE = date;
+		this.DATE = DATE;
 		this.ADDRESS = ADDRESS;
 		this.STATUS = STATUS;
 	}
@@ -49,11 +50,11 @@ public class OrderdetailsDTO {
 		public void setAMOUNT(double AMOUNT) {
 			this.AMOUNT = AMOUNT;
 		}
-		public Date getDate() {
+		public LocalDate getDate() {
 			return DATE;
 		}
-		public void setDate(Date date) {
-			this.DATE = date;
+		public void setDate(LocalDate DATE) {
+			this.DATE = DATE;
 		}
 		public String getADDRESS() {
 			return ADDRESS;
@@ -85,8 +86,19 @@ public class OrderdetailsDTO {
 			orderdetailsDTO.setADDRESS(orderdetails.getADDRESS());
 			orderdetailsDTO.setSTATUS(orderdetails.getSTATUS());
 			return orderdetailsDTO;
-			
 		}
+		
+		//Converts DTO into Entity
+		public Orderdetails createEntity() {
+			Orderdetails orderdetails = new Orderdetails();
+			orderdetails.setORDERID(this.getBUYERID());
+			orderdetails.setBuyerId(this.getBUYERID());
+			orderdetails.setAMOUNT(this.getAMOUNT());
+			orderdetails.setADDRESS(this.getADDRESS());
+			orderdetails.setDATE(this.getDate());
+			orderdetails.setSTATUS(this.getSTATUS());
+			return orderdetails;
+		}		
 	
 }
 

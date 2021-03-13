@@ -1,5 +1,6 @@
 package com.project.Order.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +10,14 @@ import com.project.Order.service.OrderService;
 import com.project.Order.dto.CartDTO;
 import com.project.Order.dto.OrderdetailsDTO;
 import com.project.Order.dto.ProductDTO;
+import com.project.Order.entity.Orderdetails;
 import com.project.Order.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +30,13 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	OrderRepository orderRepository;
+	
+	@Value("${userUrl}")
+	public String userUrl;
+	@Value("${productUrl}")
+	public String productUrl;
 	
 	//Fetches all Orders
 	@GetMapping(value = "/api/orders", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,11 +56,11 @@ public class OrderController {
 	
 	//Place an Order
 	@PostMapping(value="/api/placeOrder")
-	public ProductDTO placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
-		int buyerid = orderdetailsDTO.getBUYERID();
-		String carturl = "http://localhost:8300/api/getcart/{buyerid}";
-		String producturl = "http://localhost:8100/api/productid/{prodid}";
+	public ResponseEntity<String> placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
 		RestTemplate restTemplate = new RestTemplate();
+		int buyerid = orderdetailsDTO.getBUYERID();
+		String carturl = userUrl+"getcart/{buyerid}";
+		String producturl = productUrl+"productid/{prodid}";
 		CartDTO cartDTO = restTemplate.getForObject(carturl, CartDTO.class, buyerid);
 		int prodid = cartDTO.getPRODID();
 		ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
@@ -56,7 +68,18 @@ public class OrderController {
 		int quantity = cartDTO.getQUANTITY();
 		int amount = price*quantity;
 		System.out.println(amount);
-		return productDTO;
+		
+		//Save to Order details table
+		OrderdetailsDTO neworderdetailsDTO = new OrderdetailsDTO();
+		neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
+		neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
+		neworderdetailsDTO.setAMOUNT(amount);
+		neworderdetailsDTO.setDate(LocalDate.now());
+		neworderdetailsDTO.setSTATUS("ORDER PLACED");
+		Orderdetails orderdetails = neworderdetailsDTO.createEntity();
+		orderRepository.save(orderdetails);
+		ResponseEntity<String> response = new ResponseEntity<String>("Order placed successfully!!!", HttpStatus.OK);
+		return response;
 	}
 
 }
