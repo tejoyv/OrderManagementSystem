@@ -1,6 +1,7 @@
 package com.project.User.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -80,4 +81,12 @@ public class Validator {
 		 else 
 			 return false;
 	}
+	
+	public static boolean validateRewardPointsForPrivilege(int rewardPoints) throws Exception {
+		 if(rewardPoints>=10000)
+		    return true;
+		 else
+			 return false;
+	}
+	
 }

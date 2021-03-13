@@ -79,8 +79,8 @@ class UserApplicationTests {
 
 	@Test
 	public void getAllBuyersValid() {
-		Buyer buyer=new Buyer(1,"saurabh kumar","saurabh@gmail.com","7777766666","Kumar@w*3996",null,null,null);
-		Buyer buyer1=new Buyer(2,"aditya","aditya@gmail.com","7777766645","aditya",null,null,null);		
+		Buyer buyer=new Buyer(1,"saurabh kumar","saurabh@gmail.com","7777766666","Kumar@w*3996",0,0,1);
+		Buyer buyer1=new Buyer(2,"aditya","aditya@gmail.com","7777766645","aditya",0,0,1);		
 		
 		List<Buyer> buyers = new ArrayList<>();
 		buyers.add(buyer);
@@ -94,8 +94,8 @@ class UserApplicationTests {
 	
 	@Test
 	public void getAllSellersValid() {
-		Seller seller=new Seller(1,"saurabh kumar","saurabh@gmail.com","7777766666","Kumar@w*3996",null);
-		Seller seller1=new Seller(2,"aditya","aditya@gmail.com","7777766645","aditya",null);		
+		Seller seller=new Seller(1,"saurabh kumar","saurabh@gmail.com","7777766666","Kumar@w*3996",0);
+		Seller seller1=new Seller(2,"aditya","aditya@gmail.com","7777766645","aditya",0);		
 		
 		List<Seller> sellers = new ArrayList<>();
 		sellers.add(seller);

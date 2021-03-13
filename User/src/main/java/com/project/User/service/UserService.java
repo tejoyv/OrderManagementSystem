@@ -291,4 +291,24 @@ public class UserService {
 				return false;
 			}
 		}
+	  //updatePrivilege
+		public boolean updatePrivilege(BuyerDTO buyerDTO) throws Exception {
+			
+			Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
+			if(buyer!=null) {
+				if(Validator.validateRewardPointsForPrivilege(buyer.getRewardPoints()))
+				{
+					buyer.setIsPrivileged(1);
+					buyer.setRewardPoints(buyer.getRewardPoints()-10000);
+					buyerRepository.save(buyer);
+				}
+				else
+					throw new Exception(environment.getProperty("INSUFFICIENT_REWARDPOINTS"));
+			}
+			else
+				throw new Exception(environment.getProperty("EMAIL_DOES_NOT_EXIST"));
+			
+			return true;
+		}
+		
 }
