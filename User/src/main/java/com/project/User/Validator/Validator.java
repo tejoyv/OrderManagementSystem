@@ -80,4 +80,11 @@ public class Validator {
 		 else 
 			 return false;
 	}
+	
+	public static boolean validateRewardPointsForPrivilege(int rewardPoints) throws Exception {
+		 if(rewardPoints>=10000)
+		    return true;
+		 else
+			 return false;
+	}
 }

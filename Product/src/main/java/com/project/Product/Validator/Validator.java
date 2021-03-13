@@ -1,38 +1,36 @@
 package com.project.Product.Validator;
 
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.project.Product.dto.ProductDTO;
 
+@Component
 public class Validator {
 	
-	public static void validateProduct(ProductDTO productDTO) throws Exception {
-		
-		if(!validateName(productDTO.getPRODUCTNAME())) {
-			throw new Exception("Validator.INVALID_NAME");
-		}		
-		if(productDTO.getDESCRIPTION().length() > 500) {
-			throw new Exception("Validator.INVALID_DESCRIPTION");
-		}
-		if(productDTO.getPRICE() < 200) {
-			throw new Exception("Validator.INVALID_PRICE");
-		}
-		if(!validateStock(productDTO.getSTOCK())) {
-			throw new Exception("Validator.INVALID_STOCK");
-		}
-		if(!validateImage(productDTO.getIMAGE())){
-			throw new Exception("Validator.INVALID_IMAGE");
-		}
-		
-	}
+	@Autowired
+	Environment environment;
 	
-	public static boolean validateName(String productName) {
-		int len = productName.length();
-		String regex = "[a-zA-Z]+[a-zA-Z' ']+[a-zA-Z]+";
-		if(productName.matches(regex) && len <= 100) {
-			return true;
+
+	public void validateProduct(ProductDTO product) throws Exception {
+		if(!validateName(product.getPRODUCTNAME())) {
+			throw new Exception(environment.getProperty("INVALID_NAME"));
 		}
-		return false;
-	}
-	
+		if(!validateDescription(product.getDESCRIPTION())){
+			throw new Exception(environment.getProperty("INVALID_DESCRIPTION"));
+		}
+		if(!validatePrice(product.getPRICE())) {
+			throw new Exception(environment.getProperty("INVALID_PRICE"));
+		}
+		if(!validateStock(product.getSTOCK())) {
+			throw new Exception(environment.getProperty("INVALID_STOCK"));
+		}
+		if(!validateImage(product.getIMAGE())) {
+			throw new Exception(environment.getProperty("INVALID_IMAGEFORMAT"));
+		}
+   }
+
 	public static boolean validateImage(String image) {
 		int len = image.length(); 
 		String imageType1 =image.substring(len-5,len-1);
@@ -42,13 +40,35 @@ public class Validator {
 		}
 		return false;
 	}
-	
-	public static boolean validateStock(int stock) {
-		if(stock >= 10) {
-			return true;
-		}
+
+	private static boolean validateStock(int stock) {
+	  if(stock<=10)
+		return true;
+	  else
 		return false;
 	}
 
+	private static boolean validatePrice(double price) {
+		if(price<=200)
+			return true;
+		  else
+			return false;
+	}
 
+	private static boolean validateDescription(String description) {
+	    if(description.length()<=500)
+		    return true;
+	    else
+	    	return false;
+	}
+
+	private static boolean validateName(String productname) {
+		String regex="([A-Za-z]+\\s?)+[^@#$%^&*_!0-9. ]";
+		 if(productname.matches(regex) && productname.length()<=100){
+	            return true;
+	        }
+		 else
+			   return false;
+	}
+	
 }

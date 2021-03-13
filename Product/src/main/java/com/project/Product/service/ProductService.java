@@ -22,6 +22,9 @@ public class ProductService{
 	@Autowired
 	ProductRepository productRepository;
 	
+	@Autowired
+	Validator validator;
+	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
 		System.out.println("In service");
@@ -74,8 +77,7 @@ public class ProductService{
 
 
 	public void addProduct(ProductDTO productDTO) throws Exception {
-		// TODO Auto-generated method stub
-		Validator.validateProduct(productDTO);
+		validator.validateProduct(productDTO);
 		Product product = productDTO.createEntity();
 		productRepository.save(product);
 	}
