@@ -69,6 +69,14 @@ public class SubscribedproductDTO {
 			return "SubscribedproductDTO [SUBID=" + SUBID + ", BUYERID=" + BUYERID + ", PRODID=" + PRODID
 					+ ", QUANTITY=" + QUANTITY + "]";
 		}
+
+		public Subscribedproduct createEntity() {
+			Subscribedproduct subscribedproduct = new Subscribedproduct();
+			subscribedproduct.setBUYERID(this.getBUYERID());
+			subscribedproduct.setPRODID(this.getPRODID());
+			subscribedproduct.setQUANTITY(this.getSUBID());
+			return subscribedproduct;
+		}
 	
 		
 }
