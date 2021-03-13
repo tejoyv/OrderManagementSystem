@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.project.Product.Validator.Validator;
 import com.project.Product.dto.ProductDTO;
+import com.project.Product.dto.SubscribedproductDTO;
 import com.project.Product.entity.Product;
+import com.project.Product.entity.Subscribedproduct;
 import com.project.Product.repository.ProductRepository;
+import com.project.Product.repository.SubscribedproductRepository;
 
 @Service
 public class ProductService{
@@ -21,6 +24,9 @@ public class ProductService{
 	
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Autowired
+	SubscribedproductRepository subscribedproductRepository;
 	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
@@ -91,7 +97,4 @@ public class ProductService{
 			return false;
 		}
 	}
-	
-
-	
 }
