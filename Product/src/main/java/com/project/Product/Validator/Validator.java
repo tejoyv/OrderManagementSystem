@@ -1,7 +1,10 @@
 package com.project.Product.Validator;
 
+import org.springframework.stereotype.Component;
+
 import com.project.Product.dto.ProductDTO;
 
+@Component
 public class Validator {
 	
 	public static void validateProduct(ProductDTO productDTO) throws Exception {

@@ -28,6 +28,9 @@ public class ProductService{
 	@Autowired
 	SubscribedproductRepository subscribedproductRepository;
 	
+	@Autowired
+	Validator validator;
+	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
 		System.out.println("In service");
@@ -95,6 +98,17 @@ public class ProductService{
 			return true;
 		}else {
 			return false;
+		}
+	}
+
+	public void updateStock(ProductDTO productDTO) throws Exception {
+		validator.validateProduct(productDTO);
+		Product product = productRepository.findByPRODID(productDTO.getPRODID());
+		if(product!=null)
+		{
+			//Product product1 = productDTO.createEntity();
+			product.setSTOCK(productDTO.getSTOCK());
+			productRepository.save(product);
 		}
 	}
 }
