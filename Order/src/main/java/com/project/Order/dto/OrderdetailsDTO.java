@@ -4,19 +4,29 @@ package com.project.Order.dto;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.project.Order.entity.*;
 
 public class OrderdetailsDTO {
+
 	int ORDERID;
 	int BUYERID;
 	double AMOUNT;
 	LocalDate DATE;
 	String ADDRESS;
 	String STATUS;
-
+	List<ProductsOrderedDTO> ORDEREDPRODUCTS;
+	
+	
+	//parameterless constructor
+	public OrderdetailsDTO() {
+		super();
+	}
+	
 	//parameterised constructor
-	public OrderdetailsDTO(int ORDERID, int BUYERID, double AMOUNT, LocalDate DATE, String ADDRESS, String STATUS) {
+	public OrderdetailsDTO(int ORDERID, int BUYERID, double AMOUNT, LocalDate DATE, String ADDRESS, String STATUS,
+			List<ProductsOrderedDTO> ORDEREDPRODUCTS) {
 		super();
 		this.ORDERID = ORDERID;
 		this.BUYERID = BUYERID;
@@ -24,14 +34,18 @@ public class OrderdetailsDTO {
 		this.DATE = DATE;
 		this.ADDRESS = ADDRESS;
 		this.STATUS = STATUS;
+		this.ORDEREDPRODUCTS = ORDEREDPRODUCTS;
 	}
-	
-	//parameterless constructor
-	public OrderdetailsDTO() {
-		super();
-	}
-	
+
 	//getters and setters
+		
+		public List<ProductsOrderedDTO> getORDEREDPRODUCTS() {
+			return ORDEREDPRODUCTS;
+		}
+
+		public void setORDEREDPRODUCTS(List<ProductsOrderedDTO> ORDEREDPRODUCTS) {
+			this.ORDEREDPRODUCTS = ORDEREDPRODUCTS;
+		}
 		public int getORDERID() {
 			return ORDERID;
 		}
@@ -69,13 +83,14 @@ public class OrderdetailsDTO {
 			this.STATUS = STATUS;
 		}
 
+		
 		@Override
 		public String toString() {
-			return "OrderdetailsDTO [ORDERID=" + ORDERID + ", BUYERID=" + BUYERID + ", AMOUNT=" + AMOUNT + ", date="
-					+ DATE + ", ADDRESS=" + ADDRESS + ", STATUS=" + STATUS + "]";
+			return "OrderdetailsDTO [ORDERID=" + ORDERID + ", BUYERID=" + BUYERID + ", AMOUNT=" + AMOUNT + ", DATE="
+					+ DATE + ", ADDRESS=" + ADDRESS + ", STATUS=" + STATUS + ", ORDEREDPRODUCTS=" + ORDEREDPRODUCTS
+					+ "]";
 		}
 
-	
 		// Converts Entity into DTO
 		public static OrderdetailsDTO valueOf(Orderdetails orderdetails) {
 			OrderdetailsDTO orderdetailsDTO = new OrderdetailsDTO();
