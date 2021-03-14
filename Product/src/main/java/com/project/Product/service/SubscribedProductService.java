@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.project.Product.dto.SubscribedproductDTO;
@@ -17,10 +18,14 @@ public class SubscribedProductService {
 	@Autowired
 	SubscribedproductRepository subscribedproductRepository;
 	
+	@Autowired
+	Environment environment;
+	
 	public void addProduct(SubscribedproductDTO subscribedProductDTO) throws Exception{
-		Subscribedproduct subscribedProduct = subscribedProductDTO.createEntity();
-		subscribedproductRepository.save(subscribedProduct);
+		Subscribedproduct sub = subscribedProductDTO.createEntity();
+		subscribedproductRepository.save(sub);
 	}
+	
 	
 	public List<SubscribedproductDTO> getSubscribedProducts(int buyerId) throws Exception{
 		List<Subscribedproduct> subscribedProducts = subscribedproductRepository.findByBUYERID(buyerId);

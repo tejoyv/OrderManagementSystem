@@ -74,7 +74,7 @@ public class SubscribedproductDTO {
 			Subscribedproduct subscribedproduct = new Subscribedproduct();
 			subscribedproduct.setBUYERID(this.getBUYERID());
 			subscribedproduct.setPRODID(this.getPRODID());
-			subscribedproduct.setQUANTITY(this.getSUBID());
+			subscribedproduct.setQUANTITY(this.getQUANTITY());
 			return subscribedproduct;
 		}
 	

@@ -8,6 +8,6 @@ import com.project.Product.entity.Subscribedproduct;
 
 public interface SubscribedproductRepository extends JpaRepository<Subscribedproduct, Integer>{
 
-	public List<Subscribedproduct> findByBUYERID(int buyerId);
+	public List<Subscribedproduct> findByBUYERID(int BUYERID);
 
 }
