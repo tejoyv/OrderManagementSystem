@@ -193,7 +193,8 @@ public class UserController {
 		return wishlistDTO;
 	}
 	
-	//adding product to cart (Buyer)
+	//adding product to cart (Buyer) and deleting from wishlist
+	//Min i/p = buyerid,quantity
 	@PostMapping(value = "/api/cart/add")
 	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO){
 		logger.info("Product added to cart successfully for buyer {}",cartDTO);
@@ -211,6 +212,7 @@ public class UserController {
 		String errorMessage = "Duplicate entry found !!!!!!!";
 		if(userService.addToCart(cartDTO)) {
 			response = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
+			removeFromWishlist(wishlistDTO);
 		}else {
 			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
 		}

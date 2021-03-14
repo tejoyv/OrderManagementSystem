@@ -1,5 +1,6 @@
 package com.project.Product.Validator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +43,14 @@ public class Validator {
 	}
 
 	private static boolean validateStock(int stock) {
-	  if(stock<=10)
+	  if(stock>=10)
 		return true;
 	  else
 		return false;
 	}
 
 	private static boolean validatePrice(double price) {
-		if(price<=200)
+		if(price>=200)
 			return true;
 		  else
 			return false;
@@ -72,7 +73,7 @@ public class Validator {
 		 else
 			   return false;
 	}
-
+	
 	
 }
 
