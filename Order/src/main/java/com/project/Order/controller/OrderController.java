@@ -98,7 +98,7 @@ public class OrderController {
 		System.out.println(amount);
 		ResponseEntity<String> response=null;
 		
-		//Save to Order details table
+		//Save to Order details table!
 		if(flag==0) {
 			OrderdetailsDTO neworderdetailsDTO = new OrderdetailsDTO();
 			neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
