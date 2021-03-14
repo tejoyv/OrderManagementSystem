@@ -118,6 +118,8 @@ public class UserController {
 		return userService.getAllSellers();
 	}
 	
+	
+	//Deactivate buyer based on buyerId
 	@DeleteMapping(value="/api/buyer/deactivate/{buyerid}")
 	public ResponseEntity<String> deleteBuyer(@PathVariable Integer buyerid){
 		logger.info("Buyer successfully deleted with buyerid {}", buyerid);
@@ -129,6 +131,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Seller based on sellerId
 	@DeleteMapping(value="/api/seller/deactivate/{sellerid}")
 	public ResponseEntity<String> deleteSeller(@PathVariable Integer sellerid){
 		logger.info("Seller successfully deleted with sellerid {}", sellerid);
@@ -140,6 +143,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Buyer based on email
 	@DeleteMapping(value="/api/buyer/deactivate")
 	public ResponseEntity<String> deleteBuyer(@RequestBody BuyerDTO buyerDTO){
 		logger.info("Buyer successfully deleted with buyerrid {}", buyerDTO.getBuyerid());
@@ -155,6 +159,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Seller based on seler email
 	@DeleteMapping(value="/api/seller/deactivate")
 	public ResponseEntity<String> deleteSeller(@RequestBody SellerDTO sellerDTO){
 		logger.info("Seller successfully deleted with email {}", sellerDTO.getEmail());
