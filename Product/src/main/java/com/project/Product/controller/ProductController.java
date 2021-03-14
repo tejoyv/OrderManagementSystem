@@ -58,7 +58,7 @@ public class ProductController {
 		return productDTO;
 	}
 	
-	// add a product
+	// add a product !
 	@PostMapping(value = "/api/product/add")
 	public ResponseEntity<String> addProduct(@RequestBody ProductDTO productDTO)
 	{
