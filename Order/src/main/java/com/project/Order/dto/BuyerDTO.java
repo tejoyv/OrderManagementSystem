@@ -1,6 +1,6 @@
-package com.project.User.dto;
+package com.project.Order.dto;
 
-import com.project.User.entity.Buyer;
+
 
 public class BuyerDTO {
 	
@@ -18,7 +18,7 @@ public class BuyerDTO {
 	}
 
 	public BuyerDTO(int buyerid, String name, String password, String email, String phoneNumber, int isPrivileged,
-			int REWARDPOINTS, int isActive) {
+			int rewardPoints, int isActive) {
 		super();
 		this.BUYERID = buyerid;
 		this.NAME = name;
@@ -26,7 +26,7 @@ public class BuyerDTO {
 		this.EMAIL = email;
 		this.PHONENUMBER = phoneNumber;
 		this.ISPRIVILEGED = isPrivileged;
-		this.REWARDPOINTS = REWARDPOINTS;
+		this.REWARDPOINTS = rewardPoints;
 		this.ISACTIVE = isActive;
 	}
 
@@ -82,8 +82,8 @@ public class BuyerDTO {
 		return REWARDPOINTS;
 	}
 
-	public void setRewardPoints(int REWARDPOINTS) {
-		this.REWARDPOINTS = REWARDPOINTS;
+	public void setRewardPoints(int rewardPoints) {
+		this.REWARDPOINTS = rewardPoints;
 	}
 
 	public int getIsActive() {
@@ -94,33 +94,6 @@ public class BuyerDTO {
 		this.ISACTIVE = isActive;
 	}
 	
-	// Converts Entity into DTO
-	public static BuyerDTO valueOf(Buyer buyer) {
-		BuyerDTO buyerDTO = new BuyerDTO();
-		buyerDTO.setBuyerid(buyer.getBuyerId());
-		buyerDTO.setEmail(buyer.getEmail());
-		buyerDTO.setIsActive(buyer.getIsActive());
-		buyerDTO.setIsPrivileged(buyer.getIsPrivileged());
-		buyerDTO.setName(buyer.getName());
-		buyerDTO.setPassword(buyer.getPassword());
-		buyerDTO.setPhoneNumber(buyer.getPhoneNumber());
-		buyerDTO.setRewardPoints(buyer.getRewardPoints());
-		return buyerDTO;
-	}
-	
-	// Converts DTO into Entity
-	public Buyer createEntity() {
-		Buyer buyer = new Buyer();
-		buyer.setBuyerId(this.getBuyerid());
-		buyer.setEmail(this.getEmail());
-		buyer.setIsActive(this.getIsActive());
-		buyer.setIsPrivileged(this.getIsPrivileged());
-		buyer.setName(this.getName());
-		buyer.setPassword(this.getPassword());
-		buyer.setPhoneNumber(this.getPhoneNumber());
-		buyer.setRewardPoints(this.getRewardPoints());
-		return buyer;
-	}
 
 	@Override
 	public String toString() {

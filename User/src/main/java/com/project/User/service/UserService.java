@@ -236,10 +236,14 @@ public class UserService {
 	}
 	
 	//get CART items
-	public CartDTO getCart(int buyerid){
-		Cart cart = cartRepository.findByBUYERID(buyerid);
+	public List<CartDTO> getCart(int buyerid){
+		List<Cart> carts = cartRepository.findByBUYERID(buyerid);
+		List<CartDTO> cartDTOs = new ArrayList<>();
+		for(Cart cart : carts) {
 		CartDTO cartDTO = CartDTO.valueOf(cart);
-		return cartDTO;
+		cartDTOs.add(cartDTO);
+		}
+		return cartDTOs;
 	}
 	
 	//inactivate a buyer
@@ -321,6 +325,24 @@ public class UserService {
 				throw new Exception(environment.getProperty("EMAIL_DOES_NOT_EXIST"));
 
 			return true;
+		}
+		
+		public BuyerDTO getBuyer(Integer buyerid) {
+			
+			Buyer buyer = buyerRepository.findByBUYERID(buyerid);
+			BuyerDTO buyerDTO = BuyerDTO.valueOf(buyer);
+			return buyerDTO;
+		}
+		public BuyerDTO updateRewards(Integer buyerid, BuyerDTO buyerDTO) {
+			Buyer buyer = buyerRepository.findByBUYERID(buyerid);
+			BuyerDTO buyerDTO1 = null;
+			if(buyer!=null) {
+				buyer.setRewardPoints(buyerDTO.getRewardPoints());
+				buyerDTO1 = BuyerDTO.valueOf(buyer);
+				
+				buyerRepository.save(buyer);
+			}
+			return buyerDTO1;
 		}
 
 }

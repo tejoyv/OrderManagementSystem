@@ -35,17 +35,17 @@ public class Buyer {
 		super();
 	}
     //parametrized constructor
-	public Buyer(int BUYERID, String NAME, String PASSWORD, String EMAIL, String phoneNumber,int ISPRIVILEGED,
-			int REWARDPOINTS, int isActive) {
+	public Buyer(int BUYERID, String NAME, String PASSWORD, String EMAIL, String PHONENUMBER,int ISPRIVILEGED,
+			int REWARDPOINTS, int ISACTIVE) {
 		super();
 		this.BUYERID = BUYERID;
 		this.NAME = NAME;
 		this.PASSWORD = PASSWORD;
 		this.EMAIL = EMAIL;
-		this.PHONENUMBER = phoneNumber;
+		this.PHONENUMBER = PHONENUMBER;
 		this.ISPRIVILEGED = ISPRIVILEGED;
 		this.REWARDPOINTS = REWARDPOINTS;
-		this.ISACTIVE = isActive;
+		this.ISACTIVE = ISACTIVE;
 	}
     //getters and setters
 	public int getBuyerId() {
@@ -84,8 +84,8 @@ public class Buyer {
 		return PHONENUMBER;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.PHONENUMBER = phoneNumber;
+	public void setPhoneNumber(String PHONENUMBER) {
+		this.PHONENUMBER = PHONENUMBER;
 	}
 
 	public int getIsPrivileged() {
@@ -108,8 +108,8 @@ public class Buyer {
 		return ISACTIVE;
 	}
 
-	public void setIsActive(int isActive) {
-		this.ISACTIVE = isActive;
+	public void setIsActive(int ISACTIVE) {
+		this.ISACTIVE = ISACTIVE;
 	}
 
 	

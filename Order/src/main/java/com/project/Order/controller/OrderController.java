@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import com.project.Order.service.OrderMSException;
 import com.project.Order.service.OrderService;
+import com.project.Order.dto.BuyerDTO;
 import com.project.Order.dto.CartDTO;
 import com.project.Order.dto.OrderdetailsDTO;
 import com.project.Order.dto.ProductDTO;
+import com.project.Order.dto.ProductsOrderedDTO;
 import com.project.Order.entity.Orderdetails;
 import com.project.Order.repository.OrderRepository;
 
@@ -54,32 +56,90 @@ public class OrderController {
 		return order;
 	}
 	
-	//Place an Order
+	//Place an Order i/p = buyerid, address within validations
 	@PostMapping(value="/api/placeOrder")
 	public ResponseEntity<String> placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
+		int flag=0;
 		RestTemplate restTemplate = new RestTemplate();
 		int buyerid = orderdetailsDTO.getBUYERID();
 		String carturl = userUrl+"getcart/{buyerid}";
 		String producturl = productUrl+"productid/{prodid}";
-		CartDTO cartDTO = restTemplate.getForObject(carturl, CartDTO.class, buyerid);
-		int prodid = cartDTO.getPRODID();
-		ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
-		int price = (int) productDTO.getPRICE();
-		int quantity = cartDTO.getQUANTITY();
-		int amount = price*quantity;
+		CartDTO cartDTOs[] = restTemplate.getForObject(carturl, CartDTO[].class, buyerid);
+		double amount = 0.0;
+		for (CartDTO cartDTO2 : cartDTOs) {
+			int prodid = cartDTO2.getPRODID();
+			ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
+			int price = (int) productDTO.getPRICE();
+			int quantity = cartDTO2.getQUANTITY();
+			System.out.println("Quantity:"+quantity);
+			System.out.println("Stock:"+productDTO.getSTOCK());
+			System.out.println("Amount:"+amount);
+			amount += (price*quantity);
+			if(quantity>=productDTO.getSTOCK()) {
+				flag=1;
+				break;
+			}
+			if(orderdetailsDTO.getADDRESS().length()>=100) {
+				flag=2;
+				break;
+			}
+			
+		}
+			
+		BuyerDTO buyerDTO = restTemplate.getForObject(userUrl+"buyer/{buyerid}", BuyerDTO.class, buyerid);
+		System.out.println(buyerDTO.getRewardPoints());
+		double rewardpoints = buyerDTO.getRewardPoints();
+		
+		
+		if(rewardpoints>0) {
+			amount = amount - rewardpoints/4;
+			rewardpoints = 0;
+		}
 		System.out.println(amount);
+		ResponseEntity<String> response=null;
 		
 		//Save to Order details table
-		OrderdetailsDTO neworderdetailsDTO = new OrderdetailsDTO();
-		neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
-		neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
-		neworderdetailsDTO.setAMOUNT(amount);
-		neworderdetailsDTO.setDate(LocalDate.now());
-		neworderdetailsDTO.setSTATUS("ORDER PLACED");
-		Orderdetails orderdetails = neworderdetailsDTO.createEntity();
-		orderRepository.save(orderdetails);
-		ResponseEntity<String> response = new ResponseEntity<String>("Order placed successfully!!!", HttpStatus.OK);
+		if(flag==0) {
+			OrderdetailsDTO neworderdetailsDTO = new OrderdetailsDTO();
+			neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
+			neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
+			neworderdetailsDTO.setAMOUNT(amount);
+			neworderdetailsDTO.setDate(LocalDate.now());
+			neworderdetailsDTO.setSTATUS("ORDER PLACED");
+			int updatedRewards = (int) ((amount/100));
+			BuyerDTO buyerDTO1 = new BuyerDTO();
+			buyerDTO1.setRewardPoints(updatedRewards);
+			restTemplate.put(userUrl+"buyer/updaterewards/{buyerid}", buyerDTO1, buyerid);
+			Orderdetails orderdetails = neworderdetailsDTO.createEntity();
+			orderRepository.save(orderdetails);
+			response = new ResponseEntity<String>("Order placed successfully!!!", HttpStatus.OK);
+			}
+		else if(flag==1) {
+			response = new ResponseEntity<String>("Ordered quantity is more than stock available", HttpStatus.BAD_REQUEST);
+		}
+		else if(flag==2) {
+			response = new ResponseEntity<String>("Address should be less than 100 characters", HttpStatus.BAD_REQUEST);
+		}
+		
 		return response;
 	}
-
+	
+	//Fetch all productsOrdered in a particular OrderId
+	@GetMapping(value="/api/getProducts/{orderid}")
+	public List<ProductsOrderedDTO> getProducts(@PathVariable Integer orderid)
+	{
+		logger.info("Fetching all products ordered for id {}",orderid);
+		return orderService.getProductsOrdered(orderid);
+		
+	}
+	
+	//Fetch Order details including list of all products ordered in that particular order
+	@GetMapping(value="/api/orderdetails/{orderid}")
+	public OrderdetailsDTO getOrderDetails(@PathVariable Integer orderid) 
+	{
+		logger.info("Fetching order details for id {}",orderid);
+		return orderService.getOrderDetails(orderid);
+		
+	}
+	
 }

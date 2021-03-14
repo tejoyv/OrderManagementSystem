@@ -118,6 +118,8 @@ public class UserController {
 		return userService.getAllSellers();
 	}
 	
+	
+	//Deactivate buyer based on buyerId
 	@DeleteMapping(value="/api/buyer/deactivate/{buyerid}")
 	public ResponseEntity<String> deleteBuyer(@PathVariable Integer buyerid){
 		logger.info("Buyer successfully deleted with buyerid {}", buyerid);
@@ -129,6 +131,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Seller based on sellerId
 	@DeleteMapping(value="/api/seller/deactivate/{sellerid}")
 	public ResponseEntity<String> deleteSeller(@PathVariable Integer sellerid){
 		logger.info("Seller successfully deleted with sellerid {}", sellerid);
@@ -140,6 +143,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Buyer based on email
 	@DeleteMapping(value="/api/buyer/deactivate")
 	public ResponseEntity<String> deleteBuyer(@RequestBody BuyerDTO buyerDTO){
 		logger.info("Buyer successfully deleted with buyerrid {}", buyerDTO.getBuyerid());
@@ -155,6 +159,7 @@ public class UserController {
 		return response;
 	}
 	
+	//Deactivate Seller based on seler email
 	@DeleteMapping(value="/api/seller/deactivate")
 	public ResponseEntity<String> deleteSeller(@RequestBody SellerDTO sellerDTO){
 		logger.info("Seller successfully deleted with email {}", sellerDTO.getEmail());
@@ -221,9 +226,8 @@ public class UserController {
 	
 	//Get cart of a particular buyer
 	@GetMapping(value="/api/getcart/{buyerid}")
-	public CartDTO getCart(@PathVariable Integer buyerid){
-		CartDTO cartDTO = userService.getCart(buyerid);
-		return cartDTO;
+	public List<CartDTO> getCart(@PathVariable Integer buyerid){
+		return userService.getCart(buyerid);
 	}
 	
 	//removing product from wishlist (Buyer)
@@ -347,5 +351,19 @@ public class UserController {
 		return response;
 	}
 
+	//Fetch buyer by buyer id
+	@GetMapping(value="/api/buyer/{buyerid}")
+	public BuyerDTO getBuyer(@PathVariable Integer buyerid) {
+		return userService.getBuyer(buyerid);
+	}
+	
+	//Update reward Points i/p = 'P' capital in rewardPoints
+	@PutMapping(value="/api/buyer/updaterewards/{buyerid}")
+	public BuyerDTO updateRewardPoints(@PathVariable Integer buyerid, @RequestBody BuyerDTO buyerDTO) {
+		System.out.println(buyerDTO.getRewardPoints());
+		System.out.println(buyerid);
+		return userService.updateRewards(buyerid, buyerDTO);
+		
+	}
 }
 
