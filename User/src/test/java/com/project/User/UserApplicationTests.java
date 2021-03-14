@@ -18,15 +18,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Any;
+
 import com.project.User.dto.BuyerDTO;
 import com.project.User.dto.SellerDTO;
 import com.project.User.entity.Buyer;
 import com.project.User.entity.Seller;
 import com.project.User.repository.BuyerRepository;
+import com.project.User.repository.CartRepository;
 import com.project.User.repository.SellerRepository;
+import com.project.User.repository.WishlistRepository;
 import com.project.User.service.UserService;
-import com.sun.el.stream.Optional;
+
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,7 +40,13 @@ class UserApplicationTests {
     
     @Mock
     SellerRepository sellerRepository;
+    
+    @Mock
+    WishlistRepository wishlistRepository;
 	
+    @Mock
+    CartRepository cartRepository;
+    
     @InjectMocks
     UserService service= new UserService();
 	
@@ -52,20 +60,6 @@ class UserApplicationTests {
 		Assertions.assertEquals(true, actual);
 		 
 	}
-//	@Test
-//	public void authenticateBuyerLoginDetailsInValid() throws Exception {
-//		BuyerDTO b = new BuyerDTO();
-//		b.setEmail("veer");
-//		b.setPassword("123");
-//		
-//		BuyerDTO repo = new BuyerDTO();
-//		repo.setEmail("ankita");
-//		repo.setPassword("123");
-//		
-//		Mockito.when(buyerRepository.findByEMAIL("ankita")).thenReturn(repo.createEntity());
-//	    Exception exception=Assertions.assertThrows(Exception.class,()->service.loginBuyer(b));
-//		Assertions.assertEquals("UserService.INVALID_LOGIN", exception.getMessage());
-//	}
 	
 	@Test
 	public void authenticateSellerLoginDetailsValid() throws Exception {
@@ -106,16 +100,6 @@ class UserApplicationTests {
 		Assertions.assertEquals(sellers.isEmpty(), actual.isEmpty());
 		
 	}
-	
-//	@Test
-//	public void getAllSellersInValid() {		
-//		
-//		List<Seller> sellers = null;
-//		Mockito.when(sellerRepository.findAll()).thenReturn(null);
-//		List<SellerDTO> actual = service.getAllSellers();
-//		Assertions.assertEquals(true, actual.isEmpty());
-//		
-//	}
 	
 	@Test
 	public void deleteBuyerByIdValid() {
@@ -166,4 +150,85 @@ class UserApplicationTests {
 		Boolean actual=service.deleteSeller("ankita");
 		Assertions.assertEquals(false, actual);
 	}
+	
+	@Test
+	public void inactivateBuyerValid() {
+		BuyerDTO b = new BuyerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(buyerRepository.findByEMAIL("ankita")).thenReturn(b.createEntity());
+		Boolean actual=service.inactivateBuyer(b);
+		Assertions.assertEquals(true, actual);
+	}
+	
+	@Test
+	public void inactivateBuyerInValid() {
+		BuyerDTO b = new BuyerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(buyerRepository.findByEMAIL("ankita")).thenReturn(null);
+		Boolean actual=service.inactivateBuyer(b);
+		Assertions.assertEquals(false, actual);
+	}
+	
+	@Test
+	public void inactivateSellerValid() {
+		SellerDTO b = new SellerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(sellerRepository.findByEMAIL("ankita")).thenReturn(b.createEntity());
+		Boolean actual=service.inactivateSeller(b);
+		Assertions.assertEquals(true, actual);
+	}
+	
+	@Test
+	public void inactivateSellerInValid() {
+		SellerDTO b = new SellerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(sellerRepository.findByEMAIL("ankita")).thenReturn(null);
+		Boolean actual=service.inactivateSeller(b);
+		Assertions.assertEquals(false, actual);
+	}
+	
+	@Test
+	public void activateBuyerValid() {
+		BuyerDTO b = new BuyerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(buyerRepository.findByEMAIL("ankita")).thenReturn(b.createEntity());
+		Boolean actual=service.inactivateBuyer(b);
+		Assertions.assertEquals(true, actual);
+	}
+	
+	@Test
+	public void activateBuyerInValid() {
+		BuyerDTO b = new BuyerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(buyerRepository.findByEMAIL("ankita")).thenReturn(null);
+		Boolean actual=service.inactivateBuyer(b);
+		Assertions.assertEquals(false, actual);
+	}
+	
+	@Test
+	public void activateSellerValid() {
+		SellerDTO b = new SellerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(sellerRepository.findByEMAIL("ankita")).thenReturn(b.createEntity());
+		Boolean actual=service.inactivateSeller(b);
+		Assertions.assertEquals(true, actual);
+	}
+	
+	@Test
+	public void activateSellerInValid() {
+		SellerDTO b = new SellerDTO();
+		b.setEmail("ankita");
+		
+		Mockito.when(sellerRepository.findByEMAIL("ankita")).thenReturn(null);
+		Boolean actual=service.inactivateSeller(b);
+		Assertions.assertEquals(false, actual);
+	}
+	
 }

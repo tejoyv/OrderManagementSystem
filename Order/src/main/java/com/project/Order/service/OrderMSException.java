@@ -6,7 +6,5 @@ public class OrderMSException extends Exception {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }
