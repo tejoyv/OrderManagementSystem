@@ -70,6 +70,7 @@ public class ProductController {
 	
 	
 	// add a product
+
 	@PostMapping(value = "/api/product/add")
 	public ResponseEntity<String> addProduct(@RequestBody ProductDTO productDTO)
 	{
