@@ -121,4 +121,17 @@ public class ProductService{
 			productRepository.save(product);
 		}
 	}
+
+	public boolean removeProducts(Integer sellerid)
+	{
+		List<Product> products=productRepository.findBySELLERID(sellerid);
+		if(!products.isEmpty()) {
+			for (Product product : products) {
+				productRepository.delete(product);
+			}
+		    return true;
+		}
+		else
+			return false;
+	}
 }

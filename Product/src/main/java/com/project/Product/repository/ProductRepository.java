@@ -12,5 +12,6 @@ import com.project.Product.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	List<Product> findByCATEGORY(String CATEGORY);
 	List<Product> findByPRODUCTNAME(String PRODUCTNAME);
-	public Product findByPRODID(Integer prodid); 
+	public Product findByPRODID(Integer prodid);
+	List<Product> findBySELLERID(Integer SELLERID);
 }
