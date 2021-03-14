@@ -39,7 +39,7 @@ public class ProductController {
 	@Autowired
 	Environment environment;
 	
-	// Fetches all products
+	// Fetches all products!!
 	@GetMapping(value = "/api/products",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
 		logger.info("Fetching all products");
