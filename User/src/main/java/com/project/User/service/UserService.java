@@ -56,45 +56,41 @@ public class UserService {
 	@Autowired
 	EntityManager entityManager;
 	
-	public void registerBuyer(BuyerDTO buyerDTO) throws Exception {
+	public void registerBuyer(BuyerDTO buyerDTO) throws UserMSException {
 		logger.info("Register request for buyer {}", buyerDTO);
 		validator.validateBuyer(buyerDTO);
 		Optional<Buyer> buyerphone = buyerRepository.findByPHONENUMBER(buyerDTO.getPhoneNumber());
 		Buyer buyeremail = buyerRepository.findByEMAIL(buyerDTO.getEmail());
 		if(buyerphone.isPresent()) {
-			System.out.println("in user phone number valid");
-			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+			throw new UserMSException(environment.getProperty("USER_PHONE_EXISTS"));
 		}
 		if(buyeremail != null) {
-			System.out.println("in user email valid");
-			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+			throw new UserMSException(environment.getProperty("USER_EMAIL_EXISTS"));
 		}
 		Buyer buyer = buyerDTO.createEntity();
 		buyerRepository.save(buyer);
 	}
-	public void registerSeller(SellerDTO sellerDTO) throws Exception {
+	public void registerSeller(SellerDTO sellerDTO) throws UserMSException {
 		logger.info("Register request for seller {}", sellerDTO);
 		validator.validateSeller(sellerDTO);
 		Optional<Seller> sellerphone = sellerRepository.findByPHONENUMBER(sellerDTO.getPhoneNumber());
 		Seller selleremail = sellerRepository.findByEMAIL(sellerDTO.getEmail());
 		if(sellerphone.isPresent()) {
-			throw new Exception(environment.getProperty("USER_PHONE_EXISTS"));
+			throw new UserMSException(environment.getProperty("USER_PHONE_EXISTS"));
 		}
 		if(selleremail != null) {
-			throw new Exception(environment.getProperty("USER_EMAIL_EXISTS"));
+			throw new UserMSException(environment.getProperty("USER_EMAIL_EXISTS"));
 		}
 		Seller seller = sellerDTO.createEntity();
 		sellerRepository.save(seller);
 	}
 	
 	//login buyer
-	public boolean loginBuyer(BuyerDTO buyerDTO) throws Exception {
+	public boolean loginBuyer(BuyerDTO buyerDTO) throws UserMSException {
 		logger.info("Login request for buyer {} with buyerid {}", buyerDTO.getEmail());
 		boolean status=false;
 		Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
 		if(buyer!=null) {
-			//System.out.println("Print");
-			//Buyer buyer1 = buyer.get();
 			if (buyer.getPassword().equals(buyerDTO.getPassword())) {
 				status=true;
 			}else {
@@ -109,12 +105,11 @@ public class UserService {
 		return status;
 	}
 	//login seller
-	public boolean loginSeller(SellerDTO sellerDTO) throws Exception {
+	public boolean loginSeller(SellerDTO sellerDTO) throws UserMSException {
 			logger.info("Login request for buyer {} with sellerid {}", sellerDTO.getEmail());
 			boolean status=false;
 			Seller seller = sellerRepository.findByEMAIL(sellerDTO.getEmail());
 			if(seller!=null) {
-				System.out.println("Print");
 				if (seller.getPassword().equals(sellerDTO.getPassword())) {
 					status=true;
 				}else {
@@ -304,7 +299,7 @@ public class UserService {
 		}
 		
 		//updatePrivilege
-		public boolean updatePrivilege(BuyerDTO buyerDTO) throws Exception {
+		public boolean updatePrivilege(BuyerDTO buyerDTO) throws UserMSException {
 
 			Buyer buyer = buyerRepository.findByEMAIL(buyerDTO.getEmail());
 			if(buyer!=null) {
@@ -316,13 +311,13 @@ public class UserService {
 						buyerRepository.save(buyer);
 					}
 					else
-						throw new Exception(environment.getProperty("INSUFFICIENT_REWARDPOINTS"));
+						throw new UserMSException(environment.getProperty("INSUFFICIENT_REWARDPOINTS"));
 				}
 				else
-					throw new Exception(environment.getProperty("ALREADY_PRIVILEGED"));
+					throw new UserMSException(environment.getProperty("ALREADY_PRIVILEGED"));
 			}
 			else
-				throw new Exception(environment.getProperty("EMAIL_DOES_NOT_EXIST"));
+				throw new UserMSException(environment.getProperty("EMAIL_DOES_NOT_EXIST"));
 
 			return true;
 		}

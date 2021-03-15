@@ -41,6 +41,9 @@ public class UserController {
 	@Value("${productUrl}")
 	public String productUrl;
 	
+	@Value("${wishlistUrl}")
+	public String wishlistUrl;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// Register a new buyer
@@ -209,8 +212,8 @@ public class UserController {
 		logger.info("Product added to cart successfully for buyer {}",cartDTO);
 		int buyerid = cartDTO.getBUYERID();
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8300/api/getwishlist/{buyerid}";
-		WishlistDTO wishlistDTO = restTemplate.getForObject(url,WishlistDTO.class,buyerid);
+		//String url = "http://localhost:8300/api/getwishlist/{buyerid}";
+		WishlistDTO wishlistDTO = restTemplate.getForObject(wishlistUrl+"getwishlist/{buyerid}",WishlistDTO.class,buyerid);
 		int newbuyerid = wishlistDTO.getBUYERID();
 		int prodid = wishlistDTO.getPRODID();
 		cartDTO.setBUYERID(newbuyerid);
@@ -367,8 +370,6 @@ public class UserController {
 	//Update reward Points i/p = 'P' capital in rewardPoints
 	@PutMapping(value="/api/buyer/updaterewards/{buyerid}")
 	public BuyerDTO updateRewardPoints(@PathVariable Integer buyerid, @RequestBody BuyerDTO buyerDTO) {
-		System.out.println(buyerDTO.getRewardPoints());
-		System.out.println(buyerid);
 		return userService.updateRewards(buyerid, buyerDTO);
 		
 	}

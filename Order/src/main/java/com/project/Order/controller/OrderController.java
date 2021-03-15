@@ -71,9 +71,7 @@ public class OrderController {
 			ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
 			int price = (int) productDTO.getPRICE();
 			int quantity = cartDTO2.getQUANTITY();
-			System.out.println("Quantity:"+quantity);
-			System.out.println("Stock:"+productDTO.getSTOCK());
-			System.out.println("Amount:"+amount);
+			
 			amount += (price*quantity);
 			if(quantity>=productDTO.getSTOCK()) {
 				flag=1;
@@ -87,7 +85,6 @@ public class OrderController {
 		}
 			
 		BuyerDTO buyerDTO = restTemplate.getForObject(userUrl+"buyer/{buyerid}", BuyerDTO.class, buyerid);
-		System.out.println(buyerDTO.getRewardPoints());
 		double rewardpoints = buyerDTO.getRewardPoints();
 		
 		
@@ -95,7 +92,6 @@ public class OrderController {
 			amount = amount - rewardpoints/4;
 			rewardpoints = 0;
 		}
-		System.out.println(amount);
 		ResponseEntity<String> response=null;
 		
 		//Save to Order details table
@@ -104,7 +100,7 @@ public class OrderController {
 			neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
 			neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
 			neworderdetailsDTO.setAMOUNT(amount);
-			neworderdetailsDTO.setDate(LocalDate.now());
+			neworderdetailsDTO.setDATE(LocalDate.now());
 			neworderdetailsDTO.setSTATUS("ORDER PLACED");
 			int updatedRewards = (int) ((amount/100));
 			BuyerDTO buyerDTO1 = new BuyerDTO();
@@ -131,6 +127,13 @@ public class OrderController {
 		logger.info("Fetching all products ordered for id {}",orderid);
 		return orderService.getProductsOrdered(orderid);
 		
+	}
+	
+	//reorder an order
+	@PostMapping(value="/api/reOrder/{buyerid}/{orderid}")
+	public String reorder(@PathVariable Integer buyerid,@PathVariable Integer orderid)
+	{
+		return orderService.reOrder(orderid, buyerid);
 	}
 	
 	//Fetch Order details including list of all products ordered in that particular order
