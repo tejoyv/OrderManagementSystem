@@ -1,6 +1,9 @@
 package com.project.Order;
 
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -49,4 +52,12 @@ class OrderApplicationTests {
 		 Assertions.assertEquals(orders.isEmpty(), actual.isEmpty());
     	 
      }
+     
+     @Test
+     public void getParticularOrderValid() {
+    	int id=4;
+ 		orderRepository.findByORDERID(id);
+ 		verify(orderRepository, times(1)).findByORDERID(id);
+     }
+     
 }
