@@ -100,7 +100,7 @@ public class OrderController {
 			neworderdetailsDTO.setBUYERID(orderdetailsDTO.getBUYERID());
 			neworderdetailsDTO.setADDRESS(orderdetailsDTO.getADDRESS());
 			neworderdetailsDTO.setAMOUNT(amount);
-			neworderdetailsDTO.setDate(LocalDate.now());
+			neworderdetailsDTO.setDATE(LocalDate.now());
 			neworderdetailsDTO.setSTATUS("ORDER PLACED");
 			int updatedRewards = (int) ((amount/100));
 			BuyerDTO buyerDTO1 = new BuyerDTO();
@@ -127,6 +127,13 @@ public class OrderController {
 		logger.info("Fetching all products ordered for id {}",orderid);
 		return orderService.getProductsOrdered(orderid);
 		
+	}
+	
+	//reorder an order
+	@PostMapping(value="/api/reOrder/{buyerid}/{orderid}")
+	public String reorder(@PathVariable Integer buyerid,@PathVariable Integer orderid)
+	{
+		return orderService.reOrder(orderid, buyerid);
 	}
 	
 	//Fetch Order details including list of all products ordered in that particular order

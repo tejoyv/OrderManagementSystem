@@ -87,4 +87,16 @@ public class ProductsOrderedDTO {
 		return productsOrderedDTO;
 		
 	}
+
+	public ProductsOrdered createEntity() {
+		// TODO Auto-generated method stub
+		ProductsOrdered productsOrdered = new ProductsOrdered();
+		productsOrdered.setORDERID(this.getORDERID());
+		productsOrdered.setPRICE(this.getPRICE());
+		productsOrdered.setPRODID(this.getPRODID());
+		productsOrdered.setQUANTITY(this.getQUANTITY());
+		productsOrdered.setSELLERID(this.getSELLERID());
+		productsOrdered.setSTATUS(this.getSTATUS());
+		return productsOrdered;
+	}
 }

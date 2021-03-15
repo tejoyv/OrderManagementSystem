@@ -1,7 +1,5 @@
 package com.project.Order.dto;
 
-
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -64,10 +62,10 @@ public class OrderdetailsDTO {
 		public void setAMOUNT(double AMOUNT) {
 			this.AMOUNT = AMOUNT;
 		}
-		public LocalDate getDate() {
+		public LocalDate getDATE() {
 			return DATE;
 		}
-		public void setDate(LocalDate DATE) {
+		public void setDATE(LocalDate DATE) {
 			this.DATE = DATE;
 		}
 		public String getADDRESS() {
@@ -97,7 +95,7 @@ public class OrderdetailsDTO {
 			orderdetailsDTO.setORDERID(orderdetails.getORDERID());
 			orderdetailsDTO.setBUYERID(orderdetails.getBuyerId());
 			orderdetailsDTO.setAMOUNT(orderdetails.getAMOUNT());
-			orderdetailsDTO.setDate(orderdetails.getDATE());
+			orderdetailsDTO.setDATE(orderdetails.getDATE());
 			orderdetailsDTO.setADDRESS(orderdetails.getADDRESS());
 			orderdetailsDTO.setSTATUS(orderdetails.getSTATUS());
 			return orderdetailsDTO;
@@ -110,7 +108,7 @@ public class OrderdetailsDTO {
 			orderdetails.setBuyerId(this.getBUYERID());
 			orderdetails.setAMOUNT(this.getAMOUNT());
 			orderdetails.setADDRESS(this.getADDRESS());
-			orderdetails.setDATE(this.getDate());
+			orderdetails.setDATE(this.getDATE());
 			orderdetails.setSTATUS(this.getSTATUS());
 			return orderdetails;
 		}		

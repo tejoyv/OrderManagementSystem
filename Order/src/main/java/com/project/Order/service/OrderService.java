@@ -1,5 +1,6 @@
 package com.project.Order.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -74,4 +75,49 @@ public class OrderService{
 		return orderdetailsDTO;
 	}
 	
+	//reorder
+	public String reOrder(int ORDERID,int BUYERID) {
+		Orderdetails order = orderRepository.findByORDERID(ORDERID);
+		if(order!=null) {
+			OrderdetailsDTO orderDetailsDTO = OrderdetailsDTO.valueOf(order);
+			if(orderDetailsDTO.getBUYERID()==BUYERID) {
+				List<ProductsOrdered> productsOrdered=productsOrderedRepository.findByORDERID(ORDERID);
+				List<ProductsOrderedDTO> productList=new ArrayList<>();
+				for(ProductsOrdered p:productsOrdered) {
+					ProductsOrderedDTO productDTO=ProductsOrderedDTO.valueOf(p);
+					productList.add(productDTO);
+				}
+				
+				OrderdetailsDTO newOrderDetailsDTO = new OrderdetailsDTO();
+				newOrderDetailsDTO.setBUYERID(orderDetailsDTO.getBUYERID());
+				newOrderDetailsDTO.setADDRESS(orderDetailsDTO.getADDRESS());
+				newOrderDetailsDTO.setAMOUNT(orderDetailsDTO.getAMOUNT());
+				newOrderDetailsDTO.setDATE(LocalDate.now());
+				newOrderDetailsDTO.setSTATUS("ORDER PLACED");
+				
+				Orderdetails orderdetails = newOrderDetailsDTO.createEntity();
+		        orderRepository.save(orderdetails);
+		        
+		        for(ProductsOrderedDTO p: productList) {
+		        	ProductsOrderedDTO newProductOrderedDTO = new ProductsOrderedDTO();
+			        newProductOrderedDTO.setORDERID(orderdetails.getORDERID());
+			        newProductOrderedDTO.setPRODID(p.getPRODID());
+			        newProductOrderedDTO.setSELLERID(p.getSELLERID());
+			        newProductOrderedDTO.setQUANTITY(p.getQUANTITY());
+			        newProductOrderedDTO.setPRICE(p.getPRICE());
+			        newProductOrderedDTO.setSTATUS("ORDER PLACED");
+			        
+			        ProductsOrdered productOrdered = newProductOrderedDTO.createEntity();
+			        productsOrderedRepository.save(productOrdered);
+		        }
+		        return " Reorder Successfull!!!!";
+			}
+			
+			
+		}
+		
+		return "Order not found for the buyer!!";
+	}
 }
+	
+
