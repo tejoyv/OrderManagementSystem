@@ -150,4 +150,20 @@ public class ProductController {
 		}
 		return response;
 	}
+	
+	//Delete Products of a particular seller
+	@DeleteMapping(value = "/api/product/removeproducts/{sellerid}")
+	public ResponseEntity<String> removeProducts(@PathVariable Integer sellerid)
+	{
+		logger.info("Remove request for products with sellerid {}",sellerid);
+		ResponseEntity<String>response;
+		String successMessage = "Products removed successfully !!!!!!!";
+		String errorMessage = "No such products found";
+		if(productService.removeProducts(sellerid)) {
+			response = new ResponseEntity<String>(successMessage, HttpStatus.OK);
+		}else {
+			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
 }

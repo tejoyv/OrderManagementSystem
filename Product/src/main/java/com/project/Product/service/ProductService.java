@@ -90,7 +90,7 @@ public class ProductService{
 	public void addProduct(ProductDTO productDTO) throws Exception {
 		validator.validateProduct(productDTO);
 		List<Product> product = productRepository.findByPRODUCTNAME(productDTO.getPRODUCTNAME());
-		if(product.isEmpty()) {
+		if(product.isEmpty()){
 			Product product1 = productDTO.createEntity();
 			productRepository.save(product1);
 		}
@@ -120,5 +120,18 @@ public class ProductService{
 			product.setSTOCK(productDTO.getSTOCK());
 			productRepository.save(product);
 		}
+	}
+
+	public boolean removeProducts(Integer sellerid)
+	{
+		List<Product> products=productRepository.findBySELLERID(sellerid);
+		if(!products.isEmpty()) {
+			for (Product product : products) {
+				productRepository.delete(product);
+			}
+		    return true;
+		}
+		else
+			return false;
 	}
 }

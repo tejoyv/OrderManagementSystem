@@ -296,7 +296,7 @@ public class UserService {
 			}
 		}
 		
-
+       
 		public WishlistDTO getWishlist(Integer buyerid) {
 			Wishlist wishlist = wishlistRespository.findByBUYERID(buyerid);
 			WishlistDTO wishlistDTO = WishlistDTO.valueOf(wishlist);

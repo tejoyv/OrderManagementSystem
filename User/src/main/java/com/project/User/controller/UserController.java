@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	Environment environment;
+	
+	@Value("${productUrl}")
+	public String productUrl;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -301,7 +305,7 @@ public class UserController {
 	// inactivate a seller
 	@PostMapping(value="/api/seller/inactivate")
 	public ResponseEntity<String> temporarilyInactivateSeller(@RequestBody SellerDTO sellerDTO)
-	{
+	{   
 		logger.info("Seller inactivated  {}", sellerDTO);
 		ResponseEntity<String> response;
 		String successMessage = "Seller inactivated successfully !!!!!!!";
@@ -312,6 +316,9 @@ public class UserController {
 		else {
 			response = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
 		}
+		RestTemplate restTemplate = new RestTemplate();
+		String producturl = productUrl+"product/removeproducts/{sellerid}";
+		restTemplate.delete(producturl,sellerDTO.getSellerId());
 		return response;
 		
 	}
