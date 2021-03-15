@@ -71,9 +71,7 @@ public class OrderController {
 			ProductDTO productDTO = restTemplate.getForObject(producturl, ProductDTO.class, prodid);
 			int price = (int) productDTO.getPRICE();
 			int quantity = cartDTO2.getQUANTITY();
-			System.out.println("Quantity:"+quantity);
-			System.out.println("Stock:"+productDTO.getSTOCK());
-			System.out.println("Amount:"+amount);
+			
 			amount += (price*quantity);
 			if(quantity>=productDTO.getSTOCK()) {
 				flag=1;
@@ -87,7 +85,6 @@ public class OrderController {
 		}
 			
 		BuyerDTO buyerDTO = restTemplate.getForObject(userUrl+"buyer/{buyerid}", BuyerDTO.class, buyerid);
-		System.out.println(buyerDTO.getRewardPoints());
 		double rewardpoints = buyerDTO.getRewardPoints();
 		
 		
@@ -95,7 +92,6 @@ public class OrderController {
 			amount = amount - rewardpoints/4;
 			rewardpoints = 0;
 		}
-		System.out.println(amount);
 		ResponseEntity<String> response=null;
 		
 		//Save to Order details table

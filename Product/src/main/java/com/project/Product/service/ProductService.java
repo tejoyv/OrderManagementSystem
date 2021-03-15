@@ -38,7 +38,6 @@ public class ProductService{
 	
 	//Get the entire product list
 	public List<ProductDTO> getAllProducts() throws ProductMSException{
-		System.out.println("In service");
 		List<Product>products = productRepository.findAll();
 		List<ProductDTO> productDTOs = new ArrayList<>();
 		
@@ -87,7 +86,7 @@ public class ProductService{
 	}
 
 
-	public void addProduct(ProductDTO productDTO) throws Exception {
+	public void addProduct(ProductDTO productDTO) throws ProductMSException {
 		validator.validateProduct(productDTO);
 		List<Product> product = productRepository.findByPRODUCTNAME(productDTO.getPRODUCTNAME());
 		if(product.isEmpty()){
@@ -95,7 +94,7 @@ public class ProductService{
 			productRepository.save(product1);
 		}
 		else {
-			throw new Exception(environment.getProperty("PRODUCT_ALREADY_EXISTS"));
+			throw new ProductMSException(environment.getProperty("PRODUCT_ALREADY_EXISTS"));
 		}
 	}
 	
@@ -111,7 +110,7 @@ public class ProductService{
 		}
 	}
 
-	public void updateStock(ProductDTO productDTO) throws Exception {
+	public void updateStock(ProductDTO productDTO) throws ProductMSException {
 		validator.validateProduct(productDTO);
 		Product product = productRepository.findByPRODID(productDTO.getPRODID());
 		if(product!=null)

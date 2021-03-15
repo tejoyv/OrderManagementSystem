@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.Product.dto.ProductDTO;
+import com.project.Product.service.ProductMSException;
 
 @Component
 public class Validator {
@@ -14,21 +15,21 @@ public class Validator {
 	Environment environment;
 	
 
-	public void validateProduct(ProductDTO product) throws Exception {
+	public void validateProduct(ProductDTO product) throws ProductMSException {
 		if(!validateName(product.getPRODUCTNAME())) {
-			throw new Exception(environment.getProperty("INVALID_NAME"));
+			throw new ProductMSException(environment.getProperty("INVALID_NAME"));
 		}
 		if(!validateDescription(product.getDESCRIPTION())){
-			throw new Exception(environment.getProperty("INVALID_DESCRIPTION"));
+			throw new ProductMSException(environment.getProperty("INVALID_DESCRIPTION"));
 		}
 		if(!validatePrice(product.getPRICE())) {
-			throw new Exception(environment.getProperty("INVALID_PRICE"));
+			throw new ProductMSException(environment.getProperty("INVALID_PRICE"));
 		}
 		if(!validateStock(product.getSTOCK())) {
-			throw new Exception(environment.getProperty("INVALID_STOCK"));
+			throw new ProductMSException(environment.getProperty("INVALID_STOCK"));
 		}
 		if(!validateImage(product.getIMAGE())) {
-			throw new Exception(environment.getProperty("INVALID_IMAGE"));
+			throw new ProductMSException(environment.getProperty("INVALID_IMAGE"));
 		}
    }
 

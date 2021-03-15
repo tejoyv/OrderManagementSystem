@@ -21,17 +21,17 @@ public class SubscribedProductService {
 	@Autowired
 	Environment environment;
 	
-	public void addProduct(SubscribedproductDTO subscribedProductDTO) throws Exception{
+	public void addProduct(SubscribedproductDTO subscribedProductDTO) throws ProductMSException{
 		Subscribedproduct sub = subscribedProductDTO.createEntity();
 		subscribedproductRepository.save(sub);
 	}
 	
 	
-	public List<SubscribedproductDTO> getSubscribedProducts(int buyerId) throws Exception{
+	public List<SubscribedproductDTO> getSubscribedProducts(int buyerId) throws ProductMSException{
 		List<Subscribedproduct> subscribedProducts = subscribedproductRepository.findByBUYERID(buyerId);
 		List<SubscribedproductDTO> subscribedProductDTOs = new ArrayList<>();
 		if(subscribedProducts.isEmpty()) {
-			throw new Exception("Service.NO_SUBSCRIBED_PRODUCT_FOUND");
+			throw new ProductMSException("Service.NO_SUBSCRIBED_PRODUCT_FOUND");
 		}else {
 			for(Subscribedproduct subscribedProduct : subscribedProducts ) {
 				SubscribedproductDTO subscribedProductDTO = SubscribedproductDTO.valueOf(subscribedProduct);
