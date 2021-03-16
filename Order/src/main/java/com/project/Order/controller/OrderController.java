@@ -1,6 +1,7 @@
 package com.project.Order.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,13 +64,28 @@ public class OrderController {
 	
 	//Place an Order i/p = buyerid, address within validations
 	@PostMapping(value="/api/placeOrder")
-	public ResponseEntity<String> placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO){
+	@KafkaListener(topics = { "newtopic" })
+	public ResponseEntity<String> placeOrder(@RequestBody OrderdetailsDTO orderdetailsDTO,@RequestBody String cart){
 		int flag=0;
 		RestTemplate restTemplate = new RestTemplate();
 		int buyerid = orderdetailsDTO.getBUYERID();
 		String carturl = userUrl+"getcart/{buyerid}";
 		String producturl = productUrl+"productid/{prodid}";
-		CartDTO cartDTOs[] = restTemplate.getForObject(carturl, CartDTO[].class, buyerid);
+		
+		//System.out.println("Kafka event consumed is: " + cart);
+        //CartDTO cartDTO = gson.fromJson(cart, CartDTO.class);
+        //System.out.println(cartDTO.getBUYERID()+" "+cartDTO.getPRODID()+" "+cartDTO.getQUANTITY());
+		
+        List<CartDTO>cartDTOs = new ArrayList<>();
+        
+        for(CartDTO c:cartDTOs)
+        {
+        	CartDTO cartFromKafka = gson.fromJson(cart, CartDTO.class);
+        	System.out.println("Kafka event consumed is: " + cart);
+        	cartDTOs.add(cartFromKafka);
+        	System.out.println(c.getBUYERID()+" "+c.getPRODID()+" "+c.getQUANTITY());
+        }
+        
 		double amount = 0.0;
 		for (CartDTO cartDTO2 : cartDTOs) {
 			int prodid = cartDTO2.getPRODID();
