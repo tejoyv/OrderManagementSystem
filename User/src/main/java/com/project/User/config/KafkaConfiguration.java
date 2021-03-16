@@ -11,7 +11,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 import org.apache.kafka.common.serialization.StringSerializer;
-import com.project.User.dto.CartDTO;
 
 @Configuration
 public class KafkaConfiguration {
