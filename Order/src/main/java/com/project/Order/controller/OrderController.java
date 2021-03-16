@@ -20,9 +20,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import com.google.gson.Gson;
+
 
 @RestController
 @CrossOrigin
@@ -34,6 +37,8 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	OrderRepository orderRepository;
+    @Autowired
+    private Gson gson;
 	
 	@Value("${userUrl}")
 	public String userUrl;
@@ -144,5 +149,13 @@ public class OrderController {
 		return orderService.getOrderDetails(orderid);
 		
 	}
+	
+	@KafkaListener(topics = { "newtopic" })
+    public void getTopics(@RequestBody String cart) {
+        System.out.println("Kafka event consumed is: " + cart);
+        CartDTO cartDTO = gson.fromJson(cart, CartDTO.class);
+        System.out.println(cartDTO.getBUYERID()+" "+cartDTO.getPRODID()+" "+cartDTO.getQUANTITY());
+    }
+	
 	
 }
