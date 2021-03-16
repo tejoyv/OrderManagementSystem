@@ -1,6 +1,7 @@
 package com.project.Order.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import com.google.gson.Gson;
+
 
 @RestController
 @CrossOrigin
@@ -34,6 +38,8 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	OrderRepository orderRepository;
+    @Autowired
+    private Gson gson;
 	
 	@Value("${userUrl}")
 	public String userUrl;
@@ -65,6 +71,7 @@ public class OrderController {
 		String carturl = userUrl+"getcart/{buyerid}";
 		String producturl = productUrl+"productid/{prodid}";
 		CartDTO cartDTOs[] = restTemplate.getForObject(carturl, CartDTO[].class, buyerid);
+        
 		double amount = 0.0;
 		for (CartDTO cartDTO2 : cartDTOs) {
 			int prodid = cartDTO2.getPRODID();
@@ -144,5 +151,12 @@ public class OrderController {
 		return orderService.getOrderDetails(orderid);
 		
 	}
+	
+	@KafkaListener(topics = { "newtopic" })
+    public void getTopics(@RequestBody String cart) {
+        CartDTO cartDTO = gson.fromJson(cart, CartDTO.class);
+        System.out.println("BuyerId : "+cartDTO.getBUYERID()+" "+"ProductId : "+cartDTO.getPRODID()+" "+ "Quantity : " +cartDTO.getQUANTITY());
+    }
+	
 	
 }

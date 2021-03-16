@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.google.gson.Gson;
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
 import com.project.User.dto.CartDTO;
@@ -38,13 +40,21 @@ public class UserController {
 	@Autowired
 	Environment environment;
 	
+    @Autowired
+    private Gson gson;
+	
 	@Value("${productUrl}")
 	public String productUrl;
 	
 	@Value("${wishlistUrl}")
 	public String wishlistUrl;
 	
+	@Autowired
+	KafkaTemplate<String, String> kafkaTemplate;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	private static final String TOPIC = "newtopic";
 	
 	// Register a new buyer
 	@PostMapping(value="/api/buyer/register")
@@ -373,5 +383,15 @@ public class UserController {
 		return userService.updateRewards(buyerid, buyerDTO);
 		
 	}
+	
+	// kafka producer endpoint
+	@PostMapping(value="/api/publish")
+	public String publishMessage(@RequestBody CartDTO cartDTO)
+	{
+		kafkaTemplate.send(TOPIC,gson.toJson(cartDTO));
+		return "Published successfully";
+	}
+	
+	
 }
 
