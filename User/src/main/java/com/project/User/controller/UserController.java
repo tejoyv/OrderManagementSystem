@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,12 @@ public class UserController {
 	@Value("${wishlistUrl}")
 	public String wishlistUrl;
 	
+	@Autowired
+	KafkaTemplate<String, String> kafkaTemplate;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	private static final String TOPIC = "newtopic";
 	
 	// Register a new buyer
 	@PostMapping(value="/api/buyer/register")
@@ -373,5 +379,15 @@ public class UserController {
 		return userService.updateRewards(buyerid, buyerDTO);
 		
 	}
+	
+	// kafka producer endpoint
+	@GetMapping(value="/api/producer/{message}")
+	public String publishMessage(@PathVariable String message)
+	{
+		kafkaTemplate.send(TOPIC,message);
+		return "Published successfully";
+	}
+	
+	
 }
 
