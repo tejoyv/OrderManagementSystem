@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.google.gson.Gson;
 import com.project.User.Validator.Validator;
 import com.project.User.dto.BuyerDTO;
 import com.project.User.dto.CartDTO;
@@ -38,6 +39,9 @@ public class UserController {
 	
 	@Autowired
 	Environment environment;
+	
+    @Autowired
+    private Gson gson;
 	
 	@Value("${productUrl}")
 	public String productUrl;
@@ -381,10 +385,10 @@ public class UserController {
 	}
 	
 	// kafka producer endpoint
-	@GetMapping(value="/api/producer/{message}")
-	public String publishMessage(@PathVariable String message)
+	@PostMapping(value="/api/publish")
+	public String publishMessage(@RequestBody CartDTO cartDTO)
 	{
-		kafkaTemplate.send(TOPIC,message);
+		kafkaTemplate.send(TOPIC,gson.toJson(cartDTO));
 		return "Published successfully";
 	}
 	
