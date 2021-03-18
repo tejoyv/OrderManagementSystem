@@ -75,6 +75,19 @@ public class ProductService{
 		logger.info("Product details according to product name : {}", productDTOs);
 		return productDTOs;
 	}
+	
+	public List<ProductDTO> getProductByBrand(@PathVariable String brand) throws ProductMSException {
+		// TODO Auto-generated method stub
+		List<Product> product = productRepository.findByBRAND(brand);
+		List<ProductDTO> productDTOs = new ArrayList<>();
+		
+		for(Product p:product) {
+			productDTOs.add(ProductDTO.valueOf(p));
+		}
+		logger.info("Product details according to category : {}", productDTOs);
+		
+		return productDTOs;
+	}
 
 	public ProductDTO getProdByProdId(Integer prodid) {
 		Product product = productRepository.findByPRODID(prodid);

@@ -118,6 +118,12 @@ public class OrderService{
 		
 		return "Order not found for the buyer!!";
 	}
+
+	public List<ProductsOrderedDTO> getProductsOrderedBySellerId(Integer sellerid) {
+		// TODO Auto-generated method stub
+		List<ProductsOrderedDTO> productsOrderedDTO = productsOrderedRepository.findBySELLERID(sellerid);
+		return productsOrderedDTO;
+	}
 }
 	
 

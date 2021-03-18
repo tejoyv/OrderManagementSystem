@@ -53,8 +53,15 @@ public class ProductController {
 		return productService.getProductByCategory(category);
 	}
 	
+	// Fetches products according to product brand
+	@GetMapping(value = "/api/product/brand/{brand}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ProductDTO> getProductsByBrand(@PathVariable String brand) throws ProductMSException{
+		logger.info("Product details for product name {}", brand);
+		return productService.getProductByBrand(brand);
+	}
+	
 	// Fetches products according to product name
-	@GetMapping(value = "/api/product/{productname}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/api/product/{brand}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProductDTO> getProductsByName(@PathVariable String productname) throws ProductMSException{
 		logger.info("Product details for product name {}", productname);
 		return productService.getProductByName(productname);

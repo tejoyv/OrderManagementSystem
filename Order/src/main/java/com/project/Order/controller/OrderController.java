@@ -136,6 +136,14 @@ public class OrderController {
 		
 	}
 	
+	//Fetch all productsOrdered by a seller id
+	@GetMapping(value="/api/getProducts/seller/{sellerid}")
+	public List<ProductsOrderedDTO> getProduct(@PathVariable Integer sellerid)
+	{
+		logger.info("Fetching all products ordered for id {}",sellerid);
+		return orderService.getProductsOrderedBySellerId(sellerid);
+	}
+	
 	//reorder an order
 	@PostMapping(value="/api/reOrder/{buyerid}/{orderid}")
 	public String reorder(@PathVariable Integer buyerid,@PathVariable Integer orderid)
